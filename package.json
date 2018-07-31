@@ -1,5 +1,5 @@
 {
-  "name": "jk-management-ui",
+  "name": "seed",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
@@ -57,7 +57,7 @@
   },
   "size-limit": [
     {
-      "path": "packages/react-material/src/index.js",
+      "path": "src/index.js",
       "limit": "800 KB"
     }
   ]

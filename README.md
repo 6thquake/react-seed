@@ -2,17 +2,17 @@
   <a href="/" rel="noopener" target="_blank"><img width="20" src="/public/logo.png" alt="logo"></a></p>
 </p>
 
-<h1 align="center">jk-management-ui</h1>
+<h1 align="center">seed</h1>
 
 
 ## Installation
 
-jk-management-ui is available on code.aliyun.com.
+seed is available on git.dev.sh.ctripcorp.com.
 
 **[Stable channel (v0.x)]**
 ```sh
-$ git clone git@code.aliyun.com:jklm/jk-management-ui.git
-$ cd jk-management-ui
+$ git clone git@git.dev.sh.ctripcorp.com:sixthquake/seed.git
+$ cd seed
 $ yarn
 $ yarn start
 ```
