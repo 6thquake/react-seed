@@ -1,5 +1,5 @@
 import urls from './urls';
-import BaseDao from '../../../core/BaseDao';
+import BaseDao from '$core/BaseDao';
 
 class List extends BaseDao {
   constructor(config) {

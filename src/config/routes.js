@@ -4,9 +4,9 @@ import SubRoutes from '../modules/components/RouteWithSubRoutes/SubRoutes';
 import asyncComponent from '../modules/components/AsyncComponent';
 
 
-const Hello = asyncComponent(() => import('@pages/Hello'));
+const Hello = asyncComponent(() => import('$pages/Hello'));
 
-const World = asyncComponent(() => import('@pages/World'));
+const World = asyncComponent(() => import('$pages/World'));
 
 export default [
     {

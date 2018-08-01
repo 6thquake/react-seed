@@ -1,5 +1,5 @@
-import BaseDao from '../../core/BaseDao';
-import { domains } from "../../../config/domain";
+import BaseDao from '$core/BaseDao';
+import { domains } from "$config/domain";
 
 class MenuService extends BaseDao {
     constructor(config) {

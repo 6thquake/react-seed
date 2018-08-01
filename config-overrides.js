@@ -20,15 +20,15 @@ module.exports = {
 
         config = injectBabelPlugin(['syntax-dynamic-import'], config);
         const alias = {
-            '@pages': path.resolve(__dirname, 'src/pages'),
-            '@modules': path.resolve(__dirname, 'src/modules/modules'),
-            '@components': path.resolve(__dirname, 'src/modules/components'),
-            '@utils': path.resolve(__dirname, 'src/modules/utils'),
-            '@redux': path.resolve(__dirname, 'src/modules/redux'),
-            '@core': path.resolve(__dirname, 'src/modules/core'),
-            '@svgIcons': path.resolve(__dirname, 'src/svgIcons'),
-            '@themes': path.resolve(__dirname, 'src/themes'),
-            '@config': path.resolve(__dirname, 'src/config'),
+            '$pages': path.resolve(__dirname, 'src/pages'),
+            '$modules': path.resolve(__dirname, 'src/modules/modules'),
+            '$components': path.resolve(__dirname, 'src/modules/components'),
+            '$utils': path.resolve(__dirname, 'src/modules/utils'),
+            '$redux': path.resolve(__dirname, 'src/modules/redux'),
+            '$core': path.resolve(__dirname, 'src/modules/core'),
+            '$svgIcons': path.resolve(__dirname, 'src/svgIcons'),
+            '$themes': path.resolve(__dirname, 'src/themes'),
+            '$config': path.resolve(__dirname, 'src/config'),
         };
         for(const k in alias){
             config.resolve.alias[k] = alias[k];

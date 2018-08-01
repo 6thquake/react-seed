@@ -1,4 +1,4 @@
-import MessageQueen from '../../core/MessageQueen';
+import MessageQueen from '$core/MessageQueen';
 
 /**
  * @class MessageService
