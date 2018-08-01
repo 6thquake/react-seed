@@ -7,15 +7,16 @@ import Language from '@material-ui/icons/Language';
 import Popover from '@6thquake/react-material/Popover';
 import MenuItem from '@6thquake/react-material/MenuItem';
 import {withLocale} from '@6thquake/react-material/LocaleProvider';
-import language from '$utils/language';
 import compose from 'recompose/compose';
+import LocaleProvider from '$components/LocaleProvider';
+
 
 const styles = theme => ({});
 
 class LanguageMenu extends Component {
     state = {
         anchorEl: null,
-        value: language.getFormatLang(),
+        value: LocaleProvider.getLocaleResource(),
         options: [
             {label: '中文', value: 'zh'},
             {label: 'English', value: 'en'}
@@ -33,7 +34,7 @@ class LanguageMenu extends Component {
             anchorEl: null,
             currentLanguage: label,
         });
-        language.setLang(value);
+        LocaleProvider.setLocale(value);
         changeLocale && changeLocale(value)();
     };
 

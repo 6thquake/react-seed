@@ -4,7 +4,7 @@ import Toolbar from '@6thquake/react-material/Toolbar';
 import Typography from '@6thquake/react-material/Typography';
 import {withStyles} from '@6thquake/react-material/styles';
 import classNames from 'classnames';
-import UserInfo from '$components/UserInfo';
+import User from '$components/User';
 import LanguageMenu from '$components/LanguageMenu';
 import {withLocale} from '@6thquake/react-material/LocaleProvider';
 import compose from 'recompose/compose';
@@ -31,7 +31,7 @@ const styles = theme => ({
 
 class Bar extends Component {
     render() {
-        const {classes, open, locales} = this.props;
+        const {classes, open, title} = this.props;
 
         return (
             <AppBar
@@ -39,14 +39,14 @@ class Bar extends Component {
                 className={classNames(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar>
                     <Typography variant="title" color="inherit" noWrap className={classes.flex}>
-                        {locales['label.title.ehrms']}
+                        {title}
                     </Typography>
                     <LanguageMenu/>
-                    <UserInfo/>
+                    <User/>
                 </Toolbar>
             </AppBar>
         )
     }
 }
 
-export default compose(connect(state => ({open: state.open})), withLocale({name: 'ehr'}), withStyles(styles))(Bar);
+export default compose(connect(state => ({open: state.open})), withLocale({name: 'AppBar'}), withStyles(styles))(Bar);

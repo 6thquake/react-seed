@@ -23,14 +23,13 @@ import Progress from './svg/Progress';
 import Scrollbar from '@6thquake/react-material/Scrollbar';
 import compose from 'recompose/compose';
 import SessionStorage from '$utils/SessionStorage';
-import {SESSIONSTORAGE_KEYS} from '$utils/constant';
 import difference from 'lodash/difference';
 import {withRouter} from 'react-router-dom';
 import classNames from 'classnames';
 import Drawer from '@6thquake/react-material/Drawer';
 import {connect} from 'react-redux';
 import {operateMenuOpen} from "$redux/actions/menuOpen";
-import menu from '$config/routes';
+import menu from '$config/Routes';
 
 const styles = theme => {
     return {
@@ -171,11 +170,11 @@ class SideBar extends Component {
             openKeys.push(path);
             return path;
         });
-        SessionStorage.put(SESSIONSTORAGE_KEYS[0], openKeys);
+        // SessionStorage.put(SESSIONSTORAGE_KEYS[0], openKeys);
     }
 
     getSessionStorageMenu(openKeys) {
-        const sessionStorageKeys = SessionStorage.get(SESSIONSTORAGE_KEYS[0]);
+        const sessionStorageKeys = "";// SessionStorage.get(SESSIONSTORAGE_KEYS[0]);
         if (sessionStorageKeys && difference(sessionStorageKeys, openKeys).length) {
             return sessionStorageKeys;
         }

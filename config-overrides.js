@@ -4,6 +4,7 @@ const {
 const paths = require('react-scripts/config/paths');
 const path = require('path');
 const fs = require('fs');
+
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 

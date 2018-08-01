@@ -1,16 +1,23 @@
-import LocaleProvider from '@6thquake/react-material/LocaleProvider'
 import React, {Component} from 'react'
-import http from './dao';
-import language from '$utils/language';
+import LocaleProvider from '@6thquake/react-material/LocaleProvider'
 
+import en, { zh } from './languages'; 
 
-class LocaleProvider extends Component {
+class SeedLocaleProvider extends Component {
     constructor(props) {
         super(props);
     }
 
     state = {
         locales: {}
+    };
+
+    static getLocaleResource = () => {
+
+    };
+
+    static setLocale = (lang) => {
+
     };
 
     componentDidMount() {
@@ -25,16 +32,8 @@ class LocaleProvider extends Component {
         const {children} = this.props;
 
         let value = {
-            en: {
-                ehr: {
-                    locales: this.state.locales['en'] || {}
-                }
-            },
-            zh: {
-                ehr: {
-                    locales: this.state.locales['zh'] || {}
-                }
-            }
+            en: en,
+            zh: zh
         };
 
         let locale = this.getDefaultLocale();
@@ -47,4 +46,4 @@ class LocaleProvider extends Component {
     }
 }
 
-export default LocaleProvider;
+export default SeedLocaleProvider;

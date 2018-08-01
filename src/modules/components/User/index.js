@@ -7,8 +7,8 @@ import Popover from '@6thquake/react-material/Popover';
 import Card from '@6thquake/react-material/Card';
 import CardHeader from '@6thquake/react-material/CardHeader';
 import ExitToApp from '@material-ui/icons/ExitToApp';
-import Api from './dao';
-import DefaultAvatar from '$svgIcons/avatar';
+import UserDao from './UserDao';
+import DefaultAvatar from '$svgIcons/Avatar';
 import compose from 'recompose/compose';
 import {connect} from 'react-redux';
 import {getUserInfo} from "../../redux/actions/userInfo";
@@ -30,7 +30,7 @@ const styles = theme => ({
     }
 });
 
-class UserInfo extends Component {
+class User extends Component {
     state = {
         anchorEl: null,
         ssoUrl: '',
@@ -40,13 +40,12 @@ class UserInfo extends Component {
     componentDidMount() {
         const {dispatch} = this.props;
 
-        Api.getBasicInfo().then(res => {
+        UserDao.get().then(res => {
             if (!res) {
                 return;
             }
             const {ssoUrl, principalModel} = res.data;
             this.setState({
-                ssoUrl: `${ssoUrl}/logout`,
                 principalModel
             });
             dispatch(getUserInfo(principalModel));
@@ -113,4 +112,4 @@ class UserInfo extends Component {
     }
 }
 
-export default compose(connect(), withStyles(styles))(UserInfo);
+export default compose(connect(), withStyles(styles))(User);

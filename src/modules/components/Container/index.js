@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import routes from '$config/routes';
+import routes from '$config/Routes';
 import AppBar from '$components/AppBar';
 import RouteWithSubRoutes from '../RouteWithSubRoutes';
 import {withStyles} from '@6thquake/react-material/styles';

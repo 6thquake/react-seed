@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MQ from './MessageQueen';
-import Lang from '$component/LocaleProvider';
+import LocaleProvider from '$components/LocaleProvider';
 
 axios.defaults.baseURL = '';
 axios.defaults.withCredentials = true;
@@ -74,26 +74,6 @@ class BaseDao {
             content: retMessage
         });
         return Promise.reject(retMessage);
-    }
-
-    /**
-     * @private
-     */
-    static getLang() {
-        let language = Lang.getFormatLang();
-        switch (language) {
-            case 'zh':
-                language = 'zh_CN';
-                break;
-            case 'en':
-                language = 'en_US';
-                break;
-            default:
-                language = 'zh_CN';
-                break;
-        }
-
-        return language;
     }
 
     // 核心方法
