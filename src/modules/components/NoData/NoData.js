@@ -7,7 +7,7 @@ import Grid from '@6thquake/react-material/Grid';
 import classnames from 'classnames';
 import {withLocale} from '@6thquake/react-material/LocaleProvider';
 import Icon from './Icon';
-import omit from '../../util/omit';
+import omit from '../../utils/omit';
 import compose from 'recompose/compose';
 
 const style = theme => ({

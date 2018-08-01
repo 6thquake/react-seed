@@ -8,7 +8,7 @@ import Card from '@6thquake/react-material/Card';
 import CardHeader from '@6thquake/react-material/CardHeader';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import Api from './dao';
-import DefaultAvatar from '../../assets/svg/avatar';
+import DefaultAvatar from '@svgIcons/avatar';
 import compose from 'recompose/compose';
 import {connect} from 'react-redux';
 import {getUserInfo} from "../../redux/actions/userInfo";

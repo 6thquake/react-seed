@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import SubRoutes from '../components/RouteWithSubRoutes/SubRoutes';
-import asyncComponent from '../components/AsyncComponent';
+import SubRoutes from '../modules/components/RouteWithSubRoutes/SubRoutes';
+import asyncComponent from '../modules/components/AsyncComponent';
 
 
 const Hello = asyncComponent(() => import('@pages/Hello'));

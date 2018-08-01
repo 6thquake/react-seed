@@ -1,7 +1,7 @@
 import LocaleProvider from '@6thquake/react-material/LocaleProvider'
 import React, {Component} from 'react'
 import http from './dao';
-import language from '../../util/language';
+import language from '../../utils/language';
 
 const parseLocale = (data) => {
     let locale = {};

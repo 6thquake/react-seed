@@ -7,7 +7,7 @@ import Language from '@material-ui/icons/Language';
 import Popover from '@6thquake/react-material/Popover';
 import MenuItem from '@6thquake/react-material/MenuItem';
 import {withLocale} from '@6thquake/react-material/LocaleProvider';
-import language from '../../util/language';
+import language from '../../utils/language';
 import compose from 'recompose/compose';
 
 const styles = theme => ({});

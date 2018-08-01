@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MQ from './MessageQueen';
-import Lang from '../util/language';
+import Lang from '../utils/language';
 
 axios.defaults.baseURL = '';
 axios.defaults.withCredentials = true;

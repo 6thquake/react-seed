@@ -1,4 +1,4 @@
-import Observable from '../util/Observable';
+import Observable from '../utils/Observable';
 
 /**
  * @class MessageQueen

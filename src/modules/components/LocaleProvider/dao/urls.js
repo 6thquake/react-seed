@@ -1,7 +1,7 @@
-import createApi from '../../../util/createApi';
+import createApi from '../../../utils/createApi';
 import {
   domains
-} from "../../../config/domain";
+} from "../../../../config/domain";
 
 export default createApi(domains.common, {
   locale: 'dictionary/queryResourceI18n'
