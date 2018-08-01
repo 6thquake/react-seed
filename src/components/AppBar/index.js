@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import AppBar from 'react-material/AppBar';
-import Toolbar from 'react-material/Toolbar';
-import Typography from 'react-material/Typography';
-import {withStyles} from 'react-material/styles';
+import AppBar from '@6thquake/react-material/AppBar';
+import Toolbar from '@6thquake/react-material/Toolbar';
+import Typography from '@6thquake/react-material/Typography';
+import {withStyles} from '@6thquake/react-material/styles';
 import classNames from 'classnames';
 import UserInfo from '@components/UserInfo';
 import LanguageMenu from '@components/LanguageMenu';
-import {withLocale} from 'react-material/LocaleProvider';
+import {withLocale} from '@6thquake/react-material/LocaleProvider';
 import compose from 'recompose/compose';
 import {connect} from 'react-redux';
 

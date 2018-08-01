@@ -1,6 +1,6 @@
 import React from 'react'
-import {withStyles} from 'react-material/styles';
-import Typography from 'react-material/Typography';
+import {withStyles} from '@6thquake/react-material/styles';
+import Typography from '@6thquake/react-material/Typography';
 const styles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,

@@ -1,6 +1,6 @@
 import {
     createMuiTheme
-} from 'react-material/styles'
+} from '@6thquake/react-material/styles'
 import merge from 'deepmerge'
 import {
     teal,
@@ -13,7 +13,7 @@ import {
     orange,
     cyan,
     amber,
-} from 'react-material/colors'
+} from '@6thquake/react-material/colors'
 
 const originTheme = createMuiTheme()
 const theme = createMuiTheme({

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from 'react-material/styles';
-import SvgIcon from 'react-material/SvgIcon';
+import {withStyles} from '@6thquake/react-material/styles';
+import SvgIcon from '@6thquake/react-material/SvgIcon';
 
 const style = theme => ({});
 

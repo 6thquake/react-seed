@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import routes from '../../config/routes';
 import AppBar from '@components/AppBar';
 import RouteWithSubRoutes from '../../components/RouteWithSubRoutes';
-import {withStyles} from 'react-material/styles';
+import {withStyles} from '@6thquake/react-material/styles';
 
 
 const styles = theme => ({

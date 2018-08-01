@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from 'react-material/styles';
-import TableRow from 'react-material/TableRow';
-import TableCell from 'react-material/TableCell';
-import Grid from 'react-material/Grid';
+import {withStyles} from '@6thquake/react-material/styles';
+import TableRow from '@6thquake/react-material/TableRow';
+import TableCell from '@6thquake/react-material/TableCell';
+import Grid from '@6thquake/react-material/Grid';
 import classnames from 'classnames';
-import {withLocale} from 'react-material/LocaleProvider';
+import {withLocale} from '@6thquake/react-material/LocaleProvider';
 import Icon from './Icon';
 import omit from '../../util/omit';
 import compose from 'recompose/compose';

@@ -1,5 +1,5 @@
 import React from 'react';
-import {withLocale} from 'react-material/LocaleProvider';
+import {withLocale} from '@6thquake/react-material/LocaleProvider';
 
 function BrowserTitle(props) {
     document.title = props.locales['label.title.ehrms'] || '';

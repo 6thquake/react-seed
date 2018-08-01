@@ -1,5 +1,5 @@
 import React from 'react';
-import SvgIcon from 'react-material/SvgIcon';
+import SvgIcon from '@6thquake/react-material/SvgIcon';
 
 function Icon(props) {
     return (

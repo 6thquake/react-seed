@@ -1,4 +1,4 @@
-import LocaleProvider from 'react-material/LocaleProvider'
+import LocaleProvider from '@6thquake/react-material/LocaleProvider'
 
 const getNavigatorLanguage =() => {
   let wg = null;
