@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MQ from './MessageQueen';
-import Lang from '../utils/language';
+import Lang from '$component/LocaleProvider';
 
 axios.defaults.baseURL = '';
 axios.defaults.withCredentials = true;
@@ -65,14 +65,15 @@ class BaseDao {
         data = data || {};
         let {retMessage, retCode} = data;
         let code = Number(retCode);
-        if (code === 202) {
-            MQ.addAndNotify({
-                type: 'ERROR',
-                content: retMessage
-            });
-            return Promise.reject(retMessage);
+        if ((code >= 200 && code < 300) || (code === 304)) {
+            return response;
         }
-        return response;
+
+        MQ.addAndNotify({
+            type: 'ERROR',
+            content: retMessage
+        });
+        return Promise.reject(retMessage);
     }
 
     /**
@@ -100,8 +101,8 @@ class BaseDao {
         let conf = Object.assign({}, config);
         try {
             if (conf.data && !conf.data.head) {
-                const language = BaseDao.getLang();
-                Object.assign(conf.data, {head: {language}})
+                const locale = LocaleProvider.locale;
+                Object.assign(conf.data, {head: {locale}})
             }
         } catch (e) {
             console.log('data格式异常！');
@@ -124,7 +125,7 @@ class BaseDao {
         return this.send(config);
     }
 
-    sendGut(config = {}) {
+    sendPut(config = {}) {
         config.method = 'PUT';
 
         return this.send(config);
@@ -187,7 +188,7 @@ class BaseDao {
         return this.send(conf)
     }
 
-    del(id) {
+    remove(id) {
         let {url} = this.config;
         let conf = {
             method: 'DELETE',

@@ -22,14 +22,14 @@ import Distribution from './svg/Distribution';
 import Progress from './svg/Progress';
 import Scrollbar from '@6thquake/react-material/Scrollbar';
 import compose from 'recompose/compose';
-import SessionStorage from '../../utils/SessionStorage';
-import {SESSIONSTORAGE_KEYS} from '../../utils/constant';
+import SessionStorage from '$utils/SessionStorage';
+import {SESSIONSTORAGE_KEYS} from '$utils/constant';
 import difference from 'lodash/difference';
 import {withRouter} from 'react-router-dom';
 import classNames from 'classnames';
 import Drawer from '@6thquake/react-material/Drawer';
 import {connect} from 'react-redux';
-import {operateMenuOpen} from "../../redux/actions/menuOpen";
+import {operateMenuOpen} from "$redux/actions/menuOpen";
 import menu from '$config/routes';
 
 const styles = theme => {
