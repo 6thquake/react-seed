@@ -8,6 +8,9 @@ import Container from '$components/Container';
 import Message from '$components/Message';
 import BrowserTitle from '$components/BrowserTitle';
 import LocaleProvider from '$components/LocaleProvider';
+import {
+    LoadingPanel
+} from '@6thquake/react-material/Panel';
 
 import theme from '$themes'
 import store from '$redux';

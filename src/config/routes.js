@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import SubRoutes from '../modules/components/RouteWithSubRoutes/SubRoutes';
 import asyncComponent from '../modules/components/AsyncComponent';
-
+import StarIcon from '@material-ui/icons/Star';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 
 const Hello = asyncComponent(() => import('$pages/Hello'));
 
@@ -12,11 +13,12 @@ export default [
     {
         path: '/hello',
         name: 'module one',
+        icon: <StarIcon/>,
         component: SubRoutes,
         routes: [
             {
                 path: '/hello/world',
-                name: '',
+                name: 'my',
                 component: SubRoutes,
                 routes: [
                     {
@@ -31,6 +33,7 @@ export default [
     {
         path: '/world',
         name: 'module two',
+        icon: <InboxIcon/>,
         component: SubRoutes,
         routes: [
             {

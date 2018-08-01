@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {TreeMenu} from '@6thquake/react-material/Menu';
-import menuService from './service';
+import NavBar from '@6thquake/react-material/NavBar';
+
 import Divider from '@6thquake/react-material/Divider';
 import IconButton from '@6thquake/react-material/IconButton';
 import {withStyles} from '@6thquake/react-material/styles';
@@ -30,6 +30,7 @@ import classNames from 'classnames';
 import Drawer from '@6thquake/react-material/Drawer';
 import {connect} from 'react-redux';
 import {operateMenuOpen} from "../../redux/actions/menuOpen";
+import menu from '$config/routes';
 
 const styles = theme => {
     return {
@@ -95,25 +96,26 @@ const styles = theme => {
 
 class SideBar extends Component {
     state = {
-        menu: null,
-        icons: {
-            PerformanceManage: <PerformanceManage/>,
-            PlatformManage: <PlatformManage/>,
-            SystemManage: <SystemManage/>,
-            Config: <Config/>,
-            IndicatorLibrary: <IndicatorLibrary/>,
-            ManageCenter: <ManageCenter/>,
-            CommunicationrResults: <CommunicationrResults/>,
-            MyGoal: <MyGoal/>,
-            SelfEvaluation: <SelfEvaluation/>,
-            MyApproval: <MyApproval/>,
-            Distribution: <Distribution/>,
-            Progress: <Progress/>
-        }
+        menu: menu,
+        openKeys: ['/hello/', '/hello/world/', '/hello/world/1']
+        // icons: {
+        //     PerformanceManage: <PerformanceManage/>,
+        //     PlatformManage: <PlatformManage/>,
+        //     SystemManage: <SystemManage/>,
+        //     Config: <Config/>,
+        //     IndicatorLibrary: <IndicatorLibrary/>,
+        //     ManageCenter: <ManageCenter/>,
+        //     CommunicationrResults: <CommunicationrResults/>,
+        //     MyGoal: <MyGoal/>,
+        //     SelfEvaluation: <SelfEvaluation/>,
+        //     MyApproval: <MyApproval/>,
+        //     Distribution: <Distribution/>,
+        //     Progress: <Progress/>
+        // }
     };
 
     componentDidMount() {
-        this.getMenu();
+        // this.getMenu();
     }
 
     componentDidUpdate(prevProps) {
@@ -124,34 +126,41 @@ class SideBar extends Component {
     }
 
     getMenu = () => {
-        menuService.getMenu().then(res => {
-            if (res) {
-                const {data} = res;
-                if (data) {
-                    const routes = data.retValue[0] && data.retValue[0].routes || [];
-                    const openKeys = this.getOpenKeys();
-                    this.setState({
-                        menu: this.transformIcon(routes),
-                        openKeys: this.getSessionStorageMenu(openKeys)
-                    });
-                }
-            }
-        });
+        const openKeys = this.getOpenKeys();
+        const menuOpenKeys = this.getSessionStorageMenu(openKeys)
+        console.log('menuOpenKeys', menuOpenKeys)
+        this.setState({
+            // menu: menu,
+            openKeys: menuOpenKeys
+        })
+        // menuService.getMenu().then(res => {
+        //     if (res) {
+        //         const {data} = res;
+        //         if (data) {
+        //             const routes = data.retValue[0] && data.retValue[0].routes || [];
+        //             const openKeys = this.getOpenKeys();
+        //             this.setState({
+        //                 menu: this.transformIcon(routes),
+        //                 openKeys: this.getSessionStorageMenu(openKeys)
+        //             });
+        //         }
+        //     }
+        // });
     };
 
-    transformIcon(routes) {
-        const {icons} = this.state;
-        routes.forEach(r => {
-            let icon = r.icon;
-            if (icon) {
-                r.icon = icons[icon] || r.icon;
-            }
-            if (r.routes && r.routes.length) {
-                this.transformIcon(r.routes);
-            }
-        });
-        return routes;
-    }
+    // transformIcon(routes) {
+    //     const {icons} = this.state;
+    //     routes.forEach(r => {
+    //         let icon = r.icon;
+    //         if (icon) {
+    //             r.icon = icons[icon] || r.icon;
+    //         }
+    //         if (r.routes && r.routes.length) {
+    //             this.transformIcon(r.routes);
+    //         }
+    //     });
+    //     return routes;
+    // }
 
     setSessionStorageMenu() {
         const {hash} = window.location;
@@ -188,7 +197,6 @@ class SideBar extends Component {
             openKeys.push(path);
             return path;
         });
-
         return openKeys;
     }
 
@@ -200,7 +208,7 @@ class SideBar extends Component {
     render() {
         const {menu, openKeys} = this.state;
         const {classes, triggerCollapsed, open} = this.props;
-
+        console.log('menus', menu)
         return (
             <Drawer
                 variant="permanent"
@@ -215,7 +223,7 @@ class SideBar extends Component {
                 <div className={classes.menu}>
                     <Scrollbar>
                         {menu && (
-                            <TreeMenu
+                            <NavBar
                                 list={menu}
                                 mode='inline'
                                 itemKeysMap={{
