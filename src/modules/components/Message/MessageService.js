@@ -24,26 +24,26 @@ class MessageService {
   init() {
     this.messages = [];
     this.histories = [];
-    this.messageQueen = MessageQueue;
-    this.messageQueen.addObserver(() => {
+    this.messageQueue = new MessageQueue();
+    this.messageQueue.addObserver(() => {
       if (this.messages.length <= 0) {
         this.poll();
       }
     });
-    this.messageQueen.notifyObservers();
+    this.messageQueue.notifyObservers();
   }
 
   poll() {
-    const messageQueen = this.messageQueen;
+    const messageQueue = this.messageQueue;
     const messages = this.messages;
     const histories = this.histories;
     const len = MessageService.defaultConfig.maxLength - messages.length;
 
     for (let i = len; i > 0; i--) {
-      if (messageQueen.isEmpty()) {
+      if (messageQueue.isEmpty()) {
         break;
       }
-      messages.push(messageQueen.poll());
+      messages.push(messageQueue.poll());
     }
 
     if (!messages.length) {
@@ -79,7 +79,7 @@ class MessageService {
         histories.shift();
       }
       histories.push(message);
-      if (!messageQueen.isEmpty()) {
+      if (!messageQueue.isEmpty()) {
         this.poll();
       }
     });

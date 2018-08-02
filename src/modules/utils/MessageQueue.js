@@ -57,4 +57,4 @@ class MessageQueue extends Observable {
   }
 }
 
-export default new MessageQueue();
+export default MessageQueue;

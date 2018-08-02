@@ -6,11 +6,11 @@ import DefaultHandler from './chain/DefaultHandler';
 import isNil from 'lodash/isNil';
 
 export default class StateManager {
-  constructor($state, $location) {
-    var urlHandler = new com.ctrip.component.pageState.chain.URLHandler($state, $location);
-    var sessionHandler = new com.ctrip.component.pageState.chain.SessionHandler();
-    var localHandler = new com.ctrip.component.pageState.chain.LocalHandler();
-    var defaultHandler = new com.ctrip.component.pageState.chain.DefaultHandler();
+  constructor() {
+    var urlHandler = new URLHandler();
+    var sessionHandler = new SessionHandler();
+    var localHandler = new LocalHandler();
+    var defaultHandler = new DefaultHandler();
 
     urlHandler.setNext(sessionHandler);
     sessionHandler.setNext(localHandler);
@@ -19,12 +19,12 @@ export default class StateManager {
     this.handler = urlHandler;
   }
 
-  static getInstance($state, $location) {
-    var instance = com.ctrip.component.pageState.PageStateManager.instance;
+  static getInstance() {
+    var instance = StateManager.instance;
 
     if (!instance) {
-      instance = new com.ctrip.component.pageState.PageStateManager($state, $location);
-      com.ctrip.component.pageState.PageStateManager.instance = instance;
+      instance = new StateManager();
+      StateManager.instance = instance;
     }
 
     return instance;
