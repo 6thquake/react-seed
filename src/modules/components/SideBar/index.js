@@ -1,35 +1,26 @@
 import React, {Component} from 'react';
-import NavBar from '@6thquake/react-material/NavBar';
+import {withRouter} from 'react-router-dom';
 
+import {connect} from 'react-redux';
+import difference from 'lodash/difference';
+import classNames from 'classnames';
+import compose from 'recompose/compose';
+
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+import NavBar from '@6thquake/react-material/NavBar';
 import Divider from '@6thquake/react-material/Divider';
 import IconButton from '@6thquake/react-material/IconButton';
 import {withStyles} from '@6thquake/react-material/styles';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {withLocale} from '@6thquake/react-material/LocaleProvider';
-import Logo from './svg/Logo';
-import Config from './svg/Config';
-import IndicatorLibrary from './svg/IndicatorLibrary';
-import PerformanceManage from './svg/PerformanceManage';
-import PlatformManage from './svg/PlatformManage';
-import SystemManage from './svg/SystemManage';
-import ManageCenter from './svg/ManageCenter';
-import CommunicationrResults from './svg/CommunicationrResults';
-import MyGoal from './svg/MyGoal';
-import SelfEvaluation from './svg/SelfEvaluation';
-import MyApproval from './svg/MyApproval';
-import Distribution from './svg/Distribution';
-import Progress from './svg/Progress';
 import Scrollbar from '@6thquake/react-material/Scrollbar';
-import compose from 'recompose/compose';
 import SessionStorage from '$utils/SessionStorage';
-import difference from 'lodash/difference';
-import {withRouter} from 'react-router-dom';
-import classNames from 'classnames';
 import Drawer from '@6thquake/react-material/Drawer';
-import {connect} from 'react-redux';
+
 import {operateMenuOpen} from "$redux/actions/menuOpen";
 import menu from '$config/Routes';
+import Logo from '$components/Logo';
 
 const styles = theme => {
     return {
@@ -97,20 +88,6 @@ class SideBar extends Component {
     state = {
         menu: menu,
         openKeys: ['/hello/', '/hello/world/', '/hello/world/1']
-        // icons: {
-        //     PerformanceManage: <PerformanceManage/>,
-        //     PlatformManage: <PlatformManage/>,
-        //     SystemManage: <SystemManage/>,
-        //     Config: <Config/>,
-        //     IndicatorLibrary: <IndicatorLibrary/>,
-        //     ManageCenter: <ManageCenter/>,
-        //     CommunicationrResults: <CommunicationrResults/>,
-        //     MyGoal: <MyGoal/>,
-        //     SelfEvaluation: <SelfEvaluation/>,
-        //     MyApproval: <MyApproval/>,
-        //     Distribution: <Distribution/>,
-        //     Progress: <Progress/>
-        // }
     };
 
     componentDidMount() {
@@ -146,20 +123,6 @@ class SideBar extends Component {
         //     }
         // });
     };
-
-    // transformIcon(routes) {
-    //     const {icons} = this.state;
-    //     routes.forEach(r => {
-    //         let icon = r.icon;
-    //         if (icon) {
-    //             r.icon = icons[icon] || r.icon;
-    //         }
-    //         if (r.routes && r.routes.length) {
-    //             this.transformIcon(r.routes);
-    //         }
-    //     });
-    //     return routes;
-    // }
 
     setSessionStorageMenu() {
         const {hash} = window.location;
