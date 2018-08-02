@@ -21,8 +21,7 @@ module.exports = {
   plugins: ['babel', 'import', 'jsx-a11y', 'mocha', 'flowtype', 'prettier'],
   settings: {
     'import/resolver': {
-      webpack: {
-      },
+      webpack: {},
     },
   },
   rules: {

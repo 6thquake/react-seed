@@ -1,20 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import compose from 'recompose/compose';
-import {
-  connect
-} from 'react-redux';
+import { connect } from 'react-redux';
 
-import store from '../../redux'
-import {
-  pageLoad
-} from "../../redux/actions/pageLoad";
-import {
-  PAGE_LOAD
-} from '../../redux/actionTypes'
+import store from '../../redux';
+import { pageLoad } from '../../redux/actions/pageLoad';
+import { PAGE_LOAD } from '../../redux/actionTypes';
 class ComponentWrapper extends Component {
   state = {
-    component: null
-  }
+    component: null,
+  };
   static getDerivedStateFromProps(nextProps, prevState) {
     /**
      * mounting
@@ -24,18 +18,18 @@ class ComponentWrapper extends Component {
     // store.dispatch(pageLoad(false));
     // return null;
   }
-  
+
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(pageLoad(true));
-    console.log('store===d', dispatch === store.dispatch)
+    console.log('store===d', dispatch === store.dispatch);
   }
-  render(){
-    return this.props.children
+  render() {
+    return this.props.children;
   }
 }
 
 // export default compose(connect(state => ({
 //   load: state.open
 // })), withStyles(styles))(ComponentWrapper);
-export default connect()(ComponentWrapper)
+export default connect()(ComponentWrapper);

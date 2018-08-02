@@ -1,2 +1,2 @@
 export * from './NoData';
-export {default} from './NoData';
+export { default } from './NoData';

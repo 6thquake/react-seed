@@ -1,7 +1,7 @@
 import Storage from './Storage';
 
 class LocalStorage extends Storage {
-    storage = localStorage;
+  storage = localStorage;
 }
 
 export default new LocalStorage();

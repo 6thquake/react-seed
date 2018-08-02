@@ -17,6 +17,5 @@ export default {
     id: 'UA-106598593-2',
   },
 
-  routers: Routers
+  routers: Routers,
 };
-

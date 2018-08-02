@@ -1,7 +1,6 @@
 // menu open
 export const MENU_OPEN = 'menu_open';
 
-
 // userInfo
 export const GET_USERINFO = 'getUserInfo';
 
@@ -14,4 +13,3 @@ export const PAGE_LOAD = 'pageLoad';
 //   GET_USERINFO,
 //   PAGE_LOAD
 // }
-

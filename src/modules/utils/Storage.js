@@ -3,66 +3,65 @@ import isNumber from 'lodash/isNumber';
 import Objects from './Objects';
 
 export default class Storage {
+  put(key, value) {
+    let keys = key.split('.'),
+      k = keys.shift();
 
-    put(key, value) {
-        let keys = key.split("."),
-            k = keys.shift();
+    if (keys.length > 0) {
+      let e = this.get(k);
 
-        if (keys.length > 0) {
-            let e = this.get(k);
+      if (isNil(e) || isNumber(e)) {
+        e = {};
+      }
 
-            if (isNil(e) || isNumber(e)) {
-                e = {};
-            }
-
-            Objects.setProperty(e, keys.join("."), value);
-            value = e;
-        }
-
-        this.storage[k] = !isNil(value) ? JSON.stringify(value) : null;
+      Objects.setProperty(e, keys.join('.'), value);
+      value = e;
     }
 
-    get(key) {
-        let keys = key.split(".");
-        let k = keys.shift();
-        let e = this.storage[k];
-        let value = !isNil(e) ? JSON.parse(e) : null;
+    this.storage[k] = !isNil(value) ? JSON.stringify(value) : null;
+  }
 
-        if (keys.length > 0) {
-            value = Objects.getProperty(value, keys.join("."));
-        }
+  get(key) {
+    let keys = key.split('.');
+    let k = keys.shift();
+    let e = this.storage[k];
+    let value = !isNil(e) ? JSON.parse(e) : null;
 
-        return value;
+    if (keys.length > 0) {
+      value = Objects.getProperty(value, keys.join('.'));
     }
 
-    remove(key) {
-        let keys = key.split("."),
-            k = keys.shift(),
-            value = null;
+    return value;
+  }
 
-        if (keys.length > 0) {
-            let e = this.get(k);
+  remove(key) {
+    let keys = key.split('.'),
+      k = keys.shift(),
+      value = null;
 
-            if (!isNil(e) && !isNumber(e)) {
-                value = Objects.removeProperty(e, keys.join("."));
+    if (keys.length > 0) {
+      let e = this.get(k);
 
-                this.storage[k] = JSON.stringify(e);
-            }
-        } else {
-            value = this.storage[key];
-            delete this.storage[key];
-        }
+      if (!isNil(e) && !isNumber(e)) {
+        value = Objects.removeProperty(e, keys.join('.'));
 
-        return value;
+        this.storage[k] = JSON.stringify(e);
+      }
+    } else {
+      value = this.storage[key];
+      delete this.storage[key];
     }
 
-    clear() {
-        for (let key in this.storage) {
-            delete this.storage[key];
-        }
-    }
+    return value;
+  }
 
-    length() {
-        return Object.keys(this.storage).length;
+  clear() {
+    for (let key in this.storage) {
+      delete this.storage[key];
     }
+  }
+
+  length() {
+    return Object.keys(this.storage).length;
+  }
 }

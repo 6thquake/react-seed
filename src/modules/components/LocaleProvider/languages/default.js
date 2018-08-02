@@ -1,9 +1,9 @@
 export default {
   locale: 'en',
   BrowserTitle: {
-  	title: 'seed'
+    title: 'seed',
   },
   AppBar: {
-    title: 'seed'
-  }
+    title: 'seed',
+  },
 };
