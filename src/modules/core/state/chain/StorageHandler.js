@@ -1,6 +1,5 @@
-import Handler from './Handler';
-
 import config from '$config';
+import Handler from './Handler';
 
 const getKey = function(key) {
   let module = config.name;
@@ -23,9 +22,7 @@ const getKey = function(key) {
 
 export default class StorageHandler extends Handler {
   level = 0;
-
   excludes = [];
-
   storage = null;
 
   constructor() {}

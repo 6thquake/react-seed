@@ -1,7 +1,9 @@
-import Handler from '../Handler';
-import config from '$config';
 import qs from 'qs';
 import isArray from 'lodash';
+
+import config from '$config';
+
+import Handler from '../Handler';
 
 const getKey = function(key) {
   if (key) {

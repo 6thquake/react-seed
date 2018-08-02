@@ -1,91 +1,89 @@
-define(function(require, exports, module) {
-  require('com.ctrip.component.pageState.chain.URLHandler');
-  require('com.ctrip.component.pageState.chain.SessionHandler');
-  require('com.ctrip.component.pageState.chain.LocalHandler');
-  require('com.ctrip.component.pageState.chain.DefaultHandler');
+import URLHandler from './chain/URLHandler';
+import SessionHandler from './chain/SessionHandler';
+import LocalHandler from './chain/LocalHandler';
+import DefaultHandler from './chain/DefaultHandler';
 
-  return Class.forName({
-    name: 'class com.ctrip.component.pageState.PageStateManager',
+import isNil from 'lodash/isNil';
 
-    'private PageStateManager': function($state, $location) {
-      var urlHandler = new com.ctrip.component.pageState.chain.URLHandler($state, $location);
-      var sessionHandler = new com.ctrip.component.pageState.chain.SessionHandler();
-      var localHandler = new com.ctrip.component.pageState.chain.LocalHandler();
-      var defaultHandler = new com.ctrip.component.pageState.chain.DefaultHandler();
+export default class StateManager {
+  constructor($state, $location) {
+    var urlHandler = new com.ctrip.component.pageState.chain.URLHandler($state, $location);
+    var sessionHandler = new com.ctrip.component.pageState.chain.SessionHandler();
+    var localHandler = new com.ctrip.component.pageState.chain.LocalHandler();
+    var defaultHandler = new com.ctrip.component.pageState.chain.DefaultHandler();
 
-      urlHandler.setNext(sessionHandler);
-      sessionHandler.setNext(localHandler);
-      localHandler.setNext(defaultHandler);
+    urlHandler.setNext(sessionHandler);
+    sessionHandler.setNext(localHandler);
+    localHandler.setNext(defaultHandler);
 
-      this.handler = urlHandler;
-    },
+    this.handler = urlHandler;
+  }
 
-    'static getInstance': function($state, $location) {
-      var instance = com.ctrip.component.pageState.PageStateManager.instance;
+  static getInstance($state, $location) {
+    var instance = com.ctrip.component.pageState.PageStateManager.instance;
 
-      if (!instance) {
-        instance = new com.ctrip.component.pageState.PageStateManager($state, $location);
-        com.ctrip.component.pageState.PageStateManager.instance = instance;
+    if (!instance) {
+      instance = new com.ctrip.component.pageState.PageStateManager($state, $location);
+      com.ctrip.component.pageState.PageStateManager.instance = instance;
+    }
+
+    return instance;
+  }
+
+  getProperties() {
+    var handler = this.handler,
+      pros = [],
+      properties = {};
+
+    while (!isNil(handler)) {
+      pros.push(handler.getProperties());
+      handler = handler.nextHander;
+    }
+
+    for (var i = pros.length; i >= 0; i--) {
+      Object.extend(properties, pros[i]);
+    }
+
+    return properties;
+  }
+
+  removeProperty(key) {
+    var handler = this.handler,
+      value = null,
+      params = [];
+
+    while (!isNil(handler)) {
+      value = handler.removeProperty(key);
+      if (value) {
+        params.push(value);
       }
+      handler = handler.nextHander;
+    }
 
-      return instance;
-    },
+    return params;
+  }
 
-    getProperties: function() {
-      var handler = this.handler,
-        pros = [],
-        properties = {};
+  getProperty(key) {
+    return this.handler.handle('getProperty', key);
+  }
 
-      while (!Object.isNull(handler)) {
-        pros.push(handler.getProperties());
-        handler = handler.nextHander;
-      }
+  setProperty(level, key, value) {
+    this.handler.handle('setProperty', level, key, value);
+  }
 
-      for (var i = pros.length; i >= 0; i--) {
-        Object.extend(properties, pros[i]);
-      }
+  setProperties(level, params) {
+    this.handler.handle('setProperties', level, params);
+  }
 
-      return properties;
-    },
+  addProperties(level, params) {
+    this.handler.handle('addProperties', level, params);
+  }
 
-    removeProperty: function(key) {
-      var handler = this.handler,
-        value = null,
-        params = [];
+  updateProperties(level, params) {
+    this.handler.handle('updateProperties', level, params);
+  }
 
-      while (!Object.isNull(handler)) {
-        value = handler.removeProperty(key);
-        if (value) {
-          params.push(value);
-        }
-        handler = handler.nextHander;
-      }
-
-      return params;
-    },
-
-    getProperty: function(key) {
-      return this.handler.handle('getProperty', key);
-    },
-
-    setProperty: function(level, key, value) {
-      this.handler.handle('setProperty', level, key, value);
-    },
-
-    setProperties: function(level, params) {
-      this.handler.handle('setProperties', level, params);
-    },
-
-    addProperties: function(level, params) {
-      this.handler.handle('addProperties', level, params);
-    },
-
-    updateProperties: function(level, params) {
-      this.handler.handle('updateProperties', level, params);
-    },
-
-    setExcludes: function(level, excludes) {
-      this.handler.handle('setExcludes', level, excludes);
-    },
-  });
-});
+  setExcludes(level, excludes) {
+    this.handler.handle('setExcludes', level, excludes);
+  }
+}
