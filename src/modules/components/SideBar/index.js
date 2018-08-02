@@ -104,7 +104,6 @@ class SideBar extends Component {
     getMenu = () => {
         const openKeys = this.getOpenKeys();
         const menuOpenKeys = this.getSessionStorageMenu(openKeys)
-        console.log('menuOpenKeys', menuOpenKeys)
         this.setState({
             // menu: menu,
             openKeys: menuOpenKeys
@@ -170,7 +169,6 @@ class SideBar extends Component {
     render() {
         const {menu, openKeys} = this.state;
         const {classes, triggerCollapsed, open} = this.props;
-        console.log('menus', menu)
         return (
             <Drawer
                 variant="permanent"

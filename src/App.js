@@ -8,9 +8,15 @@ import Container from '$components/Container';
 import Message from '$components/Message';
 import BrowserTitle from '$components/BrowserTitle';
 import LocaleProvider from '$components/LocaleProvider';
+import compose from 'recompose/compose';
+import PageProgress from '$components/PageProgress'
 import {
     LoadingPanel
 } from '@6thquake/react-material/Panel';
+import {
+    connect
+} from 'react-redux';
+
 
 import theme from '$themes'
 import store from '$redux';
@@ -22,19 +28,25 @@ const styles = theme => ({
 });
 
 class App extends React.Component {
+    state={
+        load: false,
+    }
+    
     render() {
         const {classes} = this.props;
-
+        const {load} = this.state
         return (
             <Provider store={store}>
                 <MuiThemeProvider theme={theme}>
                     <LocaleProvider>
+                        <PageProgress></PageProgress>
                         <HashRouter>
                             <div className={classes.root}>
                                 <SideBar/>
-                                <Container/>
+                                <Container />
                             </div>
                         </HashRouter>
+                        {/* <Panel/>  */}
                         <Message/>
                         <BrowserTitle/>
                     </LocaleProvider>
@@ -45,3 +57,6 @@ class App extends React.Component {
 }
 
 export default withStyles(styles, {withTheme: true})(App);
+// export default compose(connect(state => ({
+//     load: state.open
+// })), withStyles(styles))(App);
