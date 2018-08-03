@@ -1,4 +1,5 @@
 import isString from 'lodash/isString';
+import isNil from 'lodash/isNil';
 
 export default class Handler {
   level = 0;
@@ -22,7 +23,7 @@ export default class Handler {
 
     let result = method.apply(this, args);
 
-    if (!Object.isNull(this.nextHander) && !result) {
+    if (!isNil(this.nextHander) && !result) {
       return this.nextHander.handle.apply(this.nextHander, arguments);
     }
 

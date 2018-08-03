@@ -1,6 +1,6 @@
 import Storage from './Storage';
 
-class SessionStorage extends Storage {
+export default class SessionStorage extends Storage {
   storage = sessionStorage;
 
   static getInstance() {
@@ -12,4 +12,3 @@ class SessionStorage extends Storage {
   }
 }
 
-export default new SessionStorage();

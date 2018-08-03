@@ -4,7 +4,7 @@ import Observable from './Observable';
  * @class MessageQueue
  * @constructor 消息队列
  */
-class MessageQueue extends Observable {
+export default class MessageQueue extends Observable {
   constructor() {
     super();
     this.queen = [];
@@ -57,4 +57,3 @@ class MessageQueue extends Observable {
   }
 }
 
-export default MessageQueue;

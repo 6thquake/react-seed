@@ -3,7 +3,7 @@ import isFunction from 'lodash/isFunction';
 /**
  *
  */
-class Observable {
+export default class Observable {
   constructor() {
     this.observers = [];
   }
@@ -44,5 +44,3 @@ class Observable {
     return this.observers.length;
   }
 }
-
-export default Observable;

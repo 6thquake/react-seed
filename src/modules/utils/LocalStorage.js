@@ -1,6 +1,6 @@
 import Storage from './Storage';
 
-class LocalStorage extends Storage {
+export default class LocalStorage extends Storage {
   storage = localStorage;
 
   static getInstance() {
@@ -12,4 +12,3 @@ class LocalStorage extends Storage {
   }
 }
 
-export default LocalStorage();
