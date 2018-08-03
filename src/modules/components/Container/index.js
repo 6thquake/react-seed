@@ -29,7 +29,6 @@ const styles = theme => ({
 
 class Container extends Component {
   componentDidMount() {
-    console.log('container mount=============1');
     const { onPageLoad } = this.props;
     onPageLoad && onPageLoad(true);
   }
