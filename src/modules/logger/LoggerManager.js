@@ -3,7 +3,7 @@ import isString from 'lodash/isString';
 import ConsoleLogger from './ConsoleLogger';
 import RavenLogger from './RavenLogger';
 
-var loggers = new Map();
+let loggers = new Map();
 
 /**
  * @class LoggerManager
@@ -58,7 +58,7 @@ export default class LoggerManager {
       throw new Error('the name is null or the calling class cannot be determined.');
     }
 
-    var logger = loggers.get(name);
+    let logger = loggers.get(name);
 
     if (!logger) {
       switch (type) {

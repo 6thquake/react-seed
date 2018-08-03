@@ -6,7 +6,7 @@ const styles = theme => ({
   root: {},
 });
 
-class GradeModule extends React.Component {
+class World extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -16,5 +16,4 @@ class GradeModule extends React.Component {
   }
 }
 
-GradeModule = withLocale({ name: 'ehr' })(GradeModule);
-export default withStyles(styles)(GradeModule);
+export default withStyles(styles)(withLocale({ name: 'World' })(World));

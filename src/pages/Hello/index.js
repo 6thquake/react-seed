@@ -2,19 +2,32 @@ import React from 'react';
 import { withStyles } from '@6thquake/react-material/styles';
 import { withLocale } from '@6thquake/react-material/LocaleProvider';
 
+import StateManager from '$core/state/StateManager';
+
 const styles = theme => ({
   root: {},
 });
 
-class GradeModule extends React.Component {
+class Hello extends React.Component {
   constructor(props) {
     super(props);
+
+    StateManager.getInstance().setProperties('default', {
+      page: 1,
+      pageSize: 10,
+    });
   }
 
   render() {
-    return <div>Hello world! I am page 1.</div>;
+    let properties = StateManager.getInstance().getProperties();
+
+    return (
+      <React.Fragment>
+        <h1>Hello world! I am page 1.</h1>
+        <p>{properties}</p>
+      </React.Fragment>
+    );
   }
 }
 
-GradeModule = withLocale({ name: 'ehr' })(GradeModule);
-export default withStyles(styles)(GradeModule);
+export default withStyles(styles)(withLocale({ name: 'Hello' })(Hello));

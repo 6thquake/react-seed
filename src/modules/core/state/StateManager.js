@@ -7,10 +7,10 @@ import isNil from 'lodash/isNil';
 
 export default class StateManager {
   constructor() {
-    var urlHandler = new URLHandler();
-    var sessionHandler = new SessionHandler();
-    var localHandler = new LocalHandler();
-    var defaultHandler = new DefaultHandler();
+    let urlHandler = new URLHandler();
+    let sessionHandler = new SessionHandler();
+    let localHandler = new LocalHandler();
+    let defaultHandler = new DefaultHandler();
 
     urlHandler.setNext(sessionHandler);
     sessionHandler.setNext(localHandler);
@@ -20,7 +20,7 @@ export default class StateManager {
   }
 
   static getInstance() {
-    var instance = StateManager.instance;
+    let instance = StateManager.instance;
 
     if (!instance) {
       instance = new StateManager();
@@ -31,26 +31,26 @@ export default class StateManager {
   }
 
   getProperties() {
-    var handler = this.handler,
-      pros = [],
-      properties = {};
+    let handler = this.handler;
+    let pros = [];
+    let properties = {};
 
     while (!isNil(handler)) {
       pros.push(handler.getProperties());
       handler = handler.nextHander;
     }
 
-    for (var i = pros.length; i >= 0; i--) {
-      Object.extend(properties, pros[i]);
+    for (let i = pros.length; i >= 0; i--) {
+      properties = { ...properties, ...pros[i] };
     }
 
     return properties;
   }
 
   removeProperty(key) {
-    var handler = this.handler,
-      value = null,
-      params = [];
+    let handler = this.handler;
+    let value = null;
+    let params = [];
 
     while (!isNil(handler)) {
       value = handler.removeProperty(key);

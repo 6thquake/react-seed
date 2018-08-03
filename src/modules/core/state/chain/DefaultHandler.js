@@ -1,17 +1,17 @@
-import StorageHandler from './StorageHandler';
 import isNumber from 'lodash/isNumber';
 import isNil from 'lodash/isNil';
 import Objects from '$utils/Objects';
+import StorageHandler from './StorageHandler';
 
 class DefaultStorage {
   storage = new Map();
 
   put(key, value) {
-    var keys = key.split('.'),
-      k = keys.shift();
+    let keys = key.split('.');
+    let k = keys.shift();
 
     if (keys.length > 0) {
-      var e = this.get(k);
+      let e = this.get(k);
 
       if (isNil(e) || isNumber(e)) {
         e = {};
@@ -25,9 +25,9 @@ class DefaultStorage {
   }
 
   get(key) {
-    var keys = key.split('.'),
-      k = keys.shift(),
-      value = this.storage.get(k);
+    let keys = key.split('.');
+    let k = keys.shift();
+    let value = this.storage.get(k);
 
     if (keys.length > 0) {
       value = Objects.getProperty(value, keys.join('.'));
@@ -37,12 +37,12 @@ class DefaultStorage {
   }
 
   remove(key) {
-    var keys = key.split('.'),
-      k = keys.shift(),
-      value = null;
+    let keys = key.split('.');
+    let k = keys.shift();
+    let value = null;
 
     if (keys.length > 0) {
-      var e = this.get(k);
+      let e = this.get(k);
 
       if (!isNil(e) && !isNumber(e)) {
         value = Objects.removeProperty(e, keys.join('.'));
@@ -72,6 +72,7 @@ export default class DefaultHandler extends StorageHandler {
   levelName = 'default';
 
   constructor() {
+    super();
     this.storage = new DefaultStorage();
   }
 }

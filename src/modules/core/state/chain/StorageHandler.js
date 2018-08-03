@@ -1,13 +1,13 @@
 import config from '$config';
-import Handler from './Handler';
+import Handler from '../Handler';
 
 const getKey = function(key) {
   let module = config.name;
 
-  let stateName = module + '.' + location.pathname;
+  let stateName = module + '.' + (global||window).location.pathname;
 
   if (key) {
-    if (key.indexOf(module) == 0) {
+    if (key.indexOf(module) === 0) {
       return key;
     } else {
       key = stateName + '.' + key;
@@ -25,7 +25,9 @@ export default class StorageHandler extends Handler {
   excludes = [];
   storage = null;
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   getProperties() {
     return this.storage.get(getKey());
@@ -40,7 +42,7 @@ export default class StorageHandler extends Handler {
   }
 
   setProperty(level, key, value) {
-    if (this.level == level || this.levelName == level) {
+    if (this.level === level || this.levelName === level) {
       if (!this.excludes.contains(key.split('.').pop())) {
         this.storage.put(getKey(key), value);
       }
@@ -48,7 +50,7 @@ export default class StorageHandler extends Handler {
   }
 
   setProperties(level, params) {
-    if (this.level == level || this.levelName == level) {
+    if (this.level === level || this.levelName === level) {
       this.storage.put(getKey(), this.filterProperties(params));
     }
   }
@@ -58,11 +60,11 @@ export default class StorageHandler extends Handler {
   }
 
   updateProperties(level, params) {
-    if (this.level == level || this.levelName == level) {
+    if (this.level === level || this.levelName === level) {
       if (params) {
-        var key = getKey(),
-          values = this.storage.get(key) || {},
-          params = this.filterProperties(params);
+        let key = getKey();
+        let values = this.storage.get(key) || {};
+        let params = this.filterProperties(params);
 
         this.storage.put(key, { ...values, ...params });
       }
@@ -70,9 +72,9 @@ export default class StorageHandler extends Handler {
   }
 
   filterProperties(params) {
-    var data = {};
+    let data = {};
 
-    for (var k in params) {
+    for (let k in params) {
       if (params.hasOwnProperty(k) && !this.excludes.contains(k)) {
         data[k] = params[k];
       }
@@ -82,7 +84,7 @@ export default class StorageHandler extends Handler {
   }
 
   setExcludes(level, excludes) {
-    if (this.level == level || this.levelName == level) {
+    if (this.level === level || this.levelName === level) {
       if (Object.isArray(excludes)) {
         this.excludes.append(excludes);
       } else {

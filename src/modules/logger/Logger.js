@@ -14,32 +14,32 @@ export default class Logger {
   fatal(message) {}
 
   isDebugEnabled() {
-    var loglevel = config.loglevel;
-    var index = loglevels.indexOf(loglevel);
+    let loglevel = config.loglevel;
+    let index = loglevels.indexOf(loglevel);
     return index <= 0;
   }
 
   isInfoEnabled() {
-    var loglevel = config.loglevels;
-    var index = loglevels.indexOf(loglevel);
+    let loglevel = config.loglevels;
+    let index = loglevels.indexOf(loglevel);
     return index <= 1;
   }
 
   isWarnEnabled() {
-    var loglevel = config.loglevels;
-    var index = loglevels.indexOf(loglevel);
+    let loglevel = config.loglevels;
+    let index = loglevels.indexOf(loglevel);
     return index <= 2;
   }
 
   isErrorEnabled() {
-    var loglevel = config.loglevels;
-    var index = loglevels.indexOf(loglevel);
+    let loglevel = config.loglevels;
+    let index = loglevels.indexOf(loglevel);
     return index <= 3;
   }
 
   isFatalEnabled() {
-    var loglevel = config.loglevels;
-    var index = loglevels.indexOf(loglevel);
+    let loglevel = config.loglevels;
+    let index = loglevels.indexOf(loglevel);
     return index <= 4;
   }
 }

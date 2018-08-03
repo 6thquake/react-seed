@@ -6,6 +6,7 @@ export default class SessionHandler extends StorageHandler {
   levelName = 'session';
 
   constructor() {
+    super();
     this.storage = SessionStorage;
   }
 }

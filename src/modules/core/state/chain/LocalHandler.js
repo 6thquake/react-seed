@@ -6,6 +6,7 @@ export default class LocalHandler extends StorageHandler {
   levelName = 'local';
 
   constructor() {
+    super();
     this.storage = LocalStorage;
   }
 }

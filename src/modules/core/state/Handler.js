@@ -12,15 +12,15 @@ export default class Handler {
       throw new Error('please specifies the method to be invoked.');
     }
 
-    var methodName = arguments[0];
+    let methodName = arguments[0];
 
-    var method = this[methodName];
+    let method = this[methodName];
 
-    var args = Array.prototype.slice.call(arguments, 1);
+    let args = Array.prototype.slice.call(arguments, 1);
 
     Array.prototype.splice.call(args, 0, 0, this);
 
-    var result = method.apply(this, args);
+    let result = method.apply(this, args);
 
     if (!Object.isNull(this.nextHander) && !result) {
       return this.nextHander.handle.apply(this.nextHander, arguments);
