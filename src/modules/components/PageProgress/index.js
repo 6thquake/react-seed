@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { withStyles, MuiThemeProvider } from '@6thquake/react-material/styles';
 import { withRouter } from 'react-router-dom';
 
-import SideBar from '$components/SideBar';
+import NavBar from '$components/NavBar';
 import Container from '$components/Container';
 import Message from '$components/Message';
 import BrowserTitle from '$components/BrowserTitle';

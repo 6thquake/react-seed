@@ -1,4 +1,4 @@
-import { PAGE_LOAD } from '../actionTypes';
+import { PAGE_LOAD } from '../types';
 
 export function pageLoad(load) {
   return {

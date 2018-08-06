@@ -1,4 +1,4 @@
-import { MENU_OPEN } from '../actionTypes';
+import { MENU_OPEN } from '../types';
 
 export function operateMenuOpen(collapse) {
   return {

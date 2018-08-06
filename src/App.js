@@ -3,7 +3,7 @@ import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { withStyles, MuiThemeProvider } from '@6thquake/react-material/styles';
 
-import SideBar from '$components/SideBar';
+import NavBar from '$components/NavBar';
 import Container from '$components/Container';
 import Message from '$components/Message';
 import BrowserTitle from '$components/BrowserTitle';
@@ -37,7 +37,7 @@ class App extends React.Component {
             <PageProgress />
             <HashRouter>
               <div className={classes.root}>
-                <SideBar />
+                <NavBar />
                 <Container />
               </div>
             </HashRouter>

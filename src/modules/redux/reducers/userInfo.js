@@ -1,4 +1,4 @@
-import { GET_USERINFO } from '../actionTypes';
+import { GET_USERINFO } from '../types';
 
 export default function(state = {}, action) {
   switch (action.type) {

@@ -15,10 +15,12 @@ import IconButton from '@6thquake/react-material/IconButton';
 import { withStyles } from '@6thquake/react-material/styles';
 import { withLocale } from '@6thquake/react-material/LocaleProvider';
 import Scrollbar from '@6thquake/react-material/Scrollbar';
-import SessionStorage from '$utils/SessionStorage';
+import Hidden from '@6thquake/react-material/Hidden';
 import Drawer from '@6thquake/react-material/Drawer';
 
+import SessionStorage from '$utils/SessionStorage';
 import { operateMenuOpen } from '$redux/actions/menuOpen';
+import { MENU_OPEN } from '$redux/types';
 import menu from '$config/Routers';
 import Logo from '$components/Logo';
 
@@ -43,8 +45,8 @@ const styles = theme => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing.unit * 7,
-      [theme.breakpoints.up('sm')]: {
+      width: theme.spacing.unit * 9,
+      [theme.breakpoints.up('md')]: {
         width: theme.spacing.unit * 9,
       },
     },
@@ -108,19 +110,6 @@ class SideBar extends Component {
       // menu: menu,
       openKeys: menuOpenKeys,
     });
-    // menuService.getMenu().then(res => {
-    //     if (res) {
-    //         const {data} = res;
-    //         if (data) {
-    //             const routes = data.retValue[0] && data.retValue[0].routes || [];
-    //             const openKeys = this.getOpenKeys();
-    //             this.setState({
-    //                 menu: this.transformIcon(routes),
-    //                 openKeys: this.getSessionStorageMenu(openKeys)
-    //             });
-    //         }
-    //     }
-    // });
   };
 
   setSessionStorageMenu() {
@@ -170,17 +159,9 @@ class SideBar extends Component {
 
   render() {
     const { menu, openKeys } = this.state;
-    const { classes, triggerCollapsed, open } = this.props;
-    return (
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
-          docked: classes.docked,
-          paperAnchorDockedLeft: classes.paperAnchorDockedLeft,
-        }}
-        open={open}
-      >
+    const { classes, theme, open } = this.props;
+    const drawer = (
+      <React.Fragment>
         <Logo open={open} />
         <div className={classes.menu}>
           <Scrollbar>
@@ -207,14 +188,51 @@ class SideBar extends Component {
             {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-      </Drawer>
+      </React.Fragment>
+    );
+
+    return (
+      <React.Fragment>
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={open}
+            onClose={this.triggerCollapsed}
+            classes={{
+              paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
+              docked: classes.docked,
+              paperAnchorDockedLeft: classes.paperAnchorDockedLeft,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+
+        <Hidden smDown implementation="css">
+          <Drawer
+            variant="permanent"
+            open={open}
+            classes={{
+              paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
+              docked: classes.docked,
+              paperAnchorDockedLeft: classes.paperAnchorDockedLeft,
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </React.Fragment>
     );
   }
 }
 
 export default compose(
-  connect(state => ({ open: state.menuOpen })),
+  connect(state => ({ open: state[MENU_OPEN] })),
   withRouter,
-  withLocale({ name: 'ehr' }),
-  withStyles(styles),
+  withLocale({ name: 'NavBar' }),
+  withStyles(styles, { withTheme: true }),
 )(SideBar);

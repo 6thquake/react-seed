@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import Event from '../../utils/Observable';
 import store from '../../redux';
 import { pageLoad } from '../../redux/actions/pageLoad';
-import { PAGE_LOAD } from '../../redux/actionTypes';
+import { PAGE_LOAD } from '../../redux/types';
 class ComponentWrapper extends Component {
   state = {
     component: null,

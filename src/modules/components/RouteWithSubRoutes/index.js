@@ -4,7 +4,7 @@ import store from '../../redux';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { pageLoad } from '../../redux/actions/pageLoad';
-import { PAGE_LOAD } from '../../redux/actionTypes';
+import { PAGE_LOAD } from '../../redux/types';
 import ComponentWrapper from '../../../modules/components/AsyncComponent/ComponentWrapper';
 function RouteWithSubRoutes(routes) {
   const SubRoutes = route => {
