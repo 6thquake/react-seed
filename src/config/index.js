@@ -17,5 +17,8 @@ export default {
     id: 'UA-106598593-2',
   },
 
+  html5Mode: false,
+  hashPrefix: '',
+
   routers: Routers,
 };

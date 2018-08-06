@@ -7,6 +7,6 @@ export default class SessionHandler extends StorageHandler {
 
   constructor() {
     super();
-    this.storage = SessionStorage;
+    this.storage = SessionStorage.getInstance();
   }
 }

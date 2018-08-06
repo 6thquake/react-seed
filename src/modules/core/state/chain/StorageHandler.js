@@ -1,20 +1,23 @@
 import config from '$config';
+import LocationManager from '$utils/Location';
 import Handler from '../Handler';
 
+const initialUrl = (global || window).location.href;
+
+const $location = LocationManager.getLocation();
+$location.$$parseLinkUrl(initialUrl, initialUrl);
+
 const getKey = function(key) {
-  let module = config.name;
-
-  let stateName = module + '.' + (global||window).location.pathname;
-
+  let module = [config.name, $location.path()].join('.');
   if (key) {
     if (key.indexOf(module) === 0) {
       return key;
     } else {
-      key = stateName + '.' + key;
+      key = `${module}.${key}`;
       return key;
     }
   } else {
-    key = stateName;
+    key = module;
   }
 
   return key;
@@ -63,10 +66,9 @@ export default class StorageHandler extends Handler {
     if (this.level === level || this.levelName === level) {
       if (params) {
         let key = getKey();
-        let values = this.storage.get(key) || {};
-        let params = this.filterProperties(params);
+        let values = { ...this.storage.get(key), ...this.filterProperties(params) };
 
-        this.storage.put(key, { ...values, ...params });
+        this.storage.put(key, values);
       }
     }
   }
@@ -75,7 +77,7 @@ export default class StorageHandler extends Handler {
     let data = {};
 
     for (let k in params) {
-      if (params.hasOwnProperty(k) && !this.excludes.contains(k)) {
+      if (params.hasOwnProperty(k) && !this.excludes.includes(k)) {
         data[k] = params[k];
       }
     }

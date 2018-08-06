@@ -56,4 +56,3 @@ export default class MessageQueue extends Observable {
     return this.queen.length === 0;
   }
 }
-

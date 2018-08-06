@@ -4,6 +4,9 @@ import { withLocale } from '@6thquake/react-material/LocaleProvider';
 
 import StateManager from '$core/state/StateManager';
 
+import Url from '$utils/Url';
+import LocationManager from '$utils/Location';
+
 const styles = theme => ({
   root: {},
 });
@@ -19,12 +22,64 @@ class Hello extends React.Component {
   }
 
   render() {
-    let properties = StateManager.getInstance().getProperties();
+    let $location = LocationManager.getLocation();
+    let initialUrl = (global || window).location.href;
+    $location.$$parseLinkUrl(initialUrl, initialUrl);
+    let hash = {
+      path: $location.path(),
+      params: $location.search(),
+      hash: $location.hash(),
+    };
+
+    let stateManager = StateManager.getInstance();
+
+    stateManager.setProperties('default', {
+      e: 5,
+    });
+    stateManager.updateProperties('default', {
+      e: 55,
+      ee: 555,
+    });
+    stateManager.removeProperty('ee');
+
+    stateManager.setProperties('local', {
+      d: 4,
+    });
+    stateManager.updateProperties('local', {
+      d: 44,
+      dd: 444,
+    });
+    stateManager.removeProperty('dd');
+
+    stateManager.setProperties('session', {
+      c: 3,
+    });
+    stateManager.updateProperties('session', {
+      c: 33,
+      cc: 333,
+    });
+    stateManager.removeProperty('cc');
+
+    let properties = stateManager.getProperties();
+
+    let a = stateManager.getProperty('a');
+    let b = stateManager.getProperty('b');
+    let c = stateManager.getProperty('c');
+    let d = stateManager.getProperty('d');
+    let e = stateManager.getProperty('e');
 
     return (
       <React.Fragment>
         <h1>Hello world! I am page 1.</h1>
-        <p>{properties}</p>
+        <br />
+        <p>{JSON.stringify(properties)}</p>
+        <br />
+        <p>
+          {a}, {b}, {c}, {d}, {e}
+        </p>
+        <br />
+        <p>{JSON.stringify(hash)}</p>
+        <br />
       </React.Fragment>
     );
   }

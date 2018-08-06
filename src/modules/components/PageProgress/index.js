@@ -12,7 +12,7 @@ import LocaleProvider from '$components/LocaleProvider';
 import compose from 'recompose/compose';
 import { LoadingPanel } from '@6thquake/react-material/Panel';
 import { connect } from 'react-redux';
-import Event from '../../utils/Observable'
+import Event from '../../utils/Observable';
 import Progress from '@6thquake/react-material/Progress';
 
 const styles = theme => ({

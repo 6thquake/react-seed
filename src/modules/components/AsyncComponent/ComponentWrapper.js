@@ -20,9 +20,9 @@ class ComponentWrapper extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    setTimeout(()=>{
+    setTimeout(() => {
       dispatch(pageLoad(true));
-    },500)
+    }, 500);
     // dispatch(pageLoad(true));
   }
   render() {

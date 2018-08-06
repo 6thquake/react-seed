@@ -11,4 +11,3 @@ export default class SessionStorage extends Storage {
     return instance;
   }
 }
-

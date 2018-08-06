@@ -11,4 +11,3 @@ export default class LocalStorage extends Storage {
     return instance;
   }
 }
-

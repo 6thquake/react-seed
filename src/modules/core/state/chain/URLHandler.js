@@ -1,13 +1,16 @@
-import qs from 'qs';
 import isArray from 'lodash';
-
 import config from '$config';
-
+import LocationManager from '$utils/Location';
 import Handler from '../Handler';
+
+const initialUrl = (global || window).location.href;
+
+const $location = LocationManager.getLocation();
+$location.$$parseLinkUrl(initialUrl, initialUrl);
 
 const getKey = function(key) {
   if (key) {
-    let module = config.name,
+    let module = [config.name, $location.path()].join('.'),
       index = key.indexOf(module);
 
     if (index === 0) {
@@ -24,20 +27,14 @@ export default class URLHandler extends Handler {
   level = 1;
   levelName = 'url';
   excludes = [];
-  mode = 'hash'; //'search'
-  location = (global || window).location;
 
   constructor() {
     super();
   }
 
   getProperties() {
-    let search = qs.parse(this.location.search);
-    let hash = qs.parse(this.location.hash);
-
     return {
-      ...hash,
-      ...search,
+      ...$location.search(),
     };
   }
 
@@ -46,17 +43,11 @@ export default class URLHandler extends Handler {
 
     let properties = this.getProperties();
 
-    let value = properties.key;
+    let value = properties[key];
 
-    delete properties.key;
+    delete properties[key];
 
-    let queryString = qs.stringify(properties);
-
-    if (this.mode === 'hash') {
-      this.location.hash = queryString;
-    } else {
-      this.location.search = queryString;
-    }
+    $location.search(properties);
 
     return value;
   }
@@ -66,7 +57,7 @@ export default class URLHandler extends Handler {
 
     let properties = this.getProperties();
 
-    return properties.key;
+    return properties[key];
   }
 
   setProperty(level, key, value) {
@@ -82,13 +73,7 @@ export default class URLHandler extends Handler {
     if (this.level === level || this.levelName === level) {
       try {
         let properties = this.filterProperties(params);
-        let queryString = qs.stringify(properties);
-
-        if (this.mode === 'hash') {
-          this.location.hash = queryString;
-        } else {
-          this.location.search = queryString;
-        }
+        $location.search(properties);
       } catch (e) {}
     }
   }
@@ -106,13 +91,7 @@ export default class URLHandler extends Handler {
             ...this.filterProperties(params),
           };
 
-          let queryString = qs.stringify(properties);
-
-          if (this.mode === 'hash') {
-            this.location.hash = queryString;
-          } else {
-            this.location.search = queryString;
-          }
+          $location.search(properties);
         } catch (e) {}
       }
     }
@@ -138,9 +117,5 @@ export default class URLHandler extends Handler {
         this.excludes.push(excludes);
       }
     }
-  }
-
-  setMode(mode) {
-    this.mode = mode;
   }
 }
