@@ -31,9 +31,6 @@ const styles = theme => ({
     zIndex: theme.zIndex.tooltip,
     width: '100%'
   },
-  progress: {
-    heighe: 1,
-  }
 });
 
 class App extends React.Component {
@@ -49,11 +46,7 @@ class App extends React.Component {
         <MuiThemeProvider theme={theme}>
           <LocaleProvider>
             <div className={classes.progressBox}>
-              <PageProgress 
-                classes={{
-                  root: classes.progress,
-                }}
-              />
+              <PageProgress/>
             </div>
             <HashRouter>
               <div className={classes.root}>
