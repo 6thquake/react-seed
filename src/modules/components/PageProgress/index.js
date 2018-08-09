@@ -23,7 +23,8 @@ const styles = theme => ({
     height:1.6,
   },
   barColor: {
-    backgroundColor: theme.palette.progress.main,
+    backgroundColor: theme.palette.progress.dark,
+    // backgroundColor: "#00BFA5"
   },
   color: {
     backgroundColor: theme.palette.common.white

@@ -19,11 +19,8 @@ import store from '$redux';
 const styles = theme => ({
   root: {
     display: 'flex',
-    flexDirection: 'column',
   },
-  content: {
-    display: 'flex'
-  },
+  
   progressBox: {
     position: 'fixed',
     top: 0,

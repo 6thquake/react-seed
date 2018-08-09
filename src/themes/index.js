@@ -32,9 +32,9 @@ const theme = createMuiTheme({
       dark: orange['700'],
     },
     success: {
-      light: green['300'],
-      main: green['500'],
-      dark: green['700'],
+      light: teal['300'],
+      main: teal['500'],
+      dark: teal['A700'],
     },
     progress: {
       light: green['300'],
