@@ -13,7 +13,7 @@ function RouteWithSubRoutes(routes) {
 
     return (
       <Route
-        exact
+        // exact
         {...rest}
         render={props => (
           // <route.components {...props} routes={route.routes}/>

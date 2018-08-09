@@ -19,7 +19,21 @@ import store from '$redux';
 const styles = theme => ({
   root: {
     display: 'flex',
+    flexDirection: 'column',
   },
+  content: {
+    display: 'flex'
+  },
+  progressBox: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: theme.zIndex.tooltip,
+    width: '100%'
+  },
+  progress: {
+    heighe: 1,
+  }
 });
 
 class App extends React.Component {
@@ -34,7 +48,13 @@ class App extends React.Component {
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <LocaleProvider>
-            <PageProgress />
+            <div className={classes.progressBox}>
+              <PageProgress 
+                classes={{
+                  root: classes.progress,
+                }}
+              />
+            </div>
             <HashRouter>
               <div className={classes.root}>
                 <NavBar />

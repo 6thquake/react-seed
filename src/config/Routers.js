@@ -5,11 +5,20 @@ import asyncComponent from '$components/AsyncComponent';
 import StarIcon from '@material-ui/icons/Star';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
+const Home = asyncComponent(() => import('$pages/Home'));
+
 const Hello = asyncComponent(() => import('$pages/Hello'));
 
 const World = asyncComponent(() => import('$pages/World'));
 
 export default [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    icon: < StarIcon / > ,
+    exact: true,
+  },
   {
     path: '/hello',
     name: 'hello',
