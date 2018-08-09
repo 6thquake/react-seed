@@ -3,16 +3,17 @@ import { Route } from 'react-router-dom';
 import store from '../../redux';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
-import { pageLoad } from '../../redux/actions/pageLoad';
-import { PAGE_LOAD } from '../../redux/types';
+import { pageLoaded } from '../../redux/actions/pageLoaded';
+import { PAGE_LOADED } from '../../redux/types';
 import ComponentWrapper from '../../../modules/components/AsyncComponent/ComponentWrapper';
 function RouteWithSubRoutes(routes) {
   const SubRoutes = route => {
     const { component, ...rest } = route;
-    store.dispatch(pageLoad(false));
+    // store.dispatch(pageLoaded(false));
 
     return (
       <Route
+        exact
         {...rest}
         render={props => (
           // <route.components {...props} routes={route.routes}/>

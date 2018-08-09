@@ -5,11 +5,4 @@ export const MENU_OPEN = 'menuOpen';
 export const GET_USERINFO = 'getUserInfo';
 
 // page load
-
-export const PAGE_LOAD = 'pageLoad';
-
-// export {
-//   MENU_OPEN,
-//   GET_USERINFO,
-//   PAGE_LOAD
-// }
+export const PAGE_LOADED = 'pageLoaded';

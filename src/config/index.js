@@ -21,4 +21,7 @@ export default {
   hashPrefix: '',
 
   routers: Routers,
+
+  api: '/api/v1',
+  websocket: 'ws://localhost:8080/websocket',
 };

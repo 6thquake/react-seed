@@ -1,5 +1,6 @@
 import MessageQueue from '$utils/MessageQueue';
 
+const messageQueue = new MessageQueue();
 /**
  * @class MessageService
  * @for Message组件
@@ -24,7 +25,7 @@ class MessageService {
   init() {
     this.messages = [];
     this.histories = [];
-    this.messageQueue = new MessageQueue();
+    this.messageQueue = messageQueue;
     this.messageQueue.addObserver(() => {
       if (this.messages.length <= 0) {
         this.poll();
@@ -133,3 +134,4 @@ class MessageService {
 }
 
 export default MessageService;
+export { messageQueue };

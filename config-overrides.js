@@ -9,7 +9,7 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 module.exports = {
   webpack: function(config, env) {
     if (env === 'production') {
-      config.output.path = paths.appBuild = resolveApp('../build');
+      config.output.path = paths.appBuild = resolveApp('./build');
     }
     config = injectBabelPlugin(
       [
@@ -31,6 +31,7 @@ module.exports = {
       $utils: path.resolve(__dirname, 'src/modules/utils'),
       $redux: path.resolve(__dirname, 'src/modules/redux'),
       $core: path.resolve(__dirname, 'src/modules/core'),
+      $service: path.resolve(__dirname, 'src/modules/service'),
       $svgIcons: path.resolve(__dirname, 'src/svgIcons'),
       $logger: path.resolve(__dirname, 'src/logger'),
       $themes: path.resolve(__dirname, 'src/themes'),
@@ -51,6 +52,13 @@ module.exports = {
           headers: {},
           changeOrigin: true,
           secure: false,
+        },
+        '/websocket': {
+          target: '/',
+          headers: {},
+          changeOrigin: true,
+          secure: false,
+          ws: true,
         },
       };
 

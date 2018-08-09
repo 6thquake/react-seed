@@ -46,7 +46,7 @@ class PageProgress extends React.Component {
 // })), withStyles(styles))(Panel);
 export default compose(
   connect(state => ({
-    load: state.pageLoad,
+    load: state.pageLoaded,
   })),
   withStyles(styles),
 )(PageProgress);

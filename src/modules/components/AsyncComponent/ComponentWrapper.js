@@ -3,8 +3,8 @@ import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 // import Event from '../../utils/Observable';
 import store from '../../redux';
-import { pageLoad } from '../../redux/actions/pageLoad';
-import { PAGE_LOAD } from '../../redux/types';
+import { pageLoaded } from '../../redux/actions/pageLoaded';
+import { PAGE_LOADED } from '../../redux/types';
 class ComponentWrapper extends Component {
   state = {
     component: null,
@@ -14,16 +14,16 @@ class ComponentWrapper extends Component {
      * mounting
      * updating
      */
-    store.dispatch(pageLoad(false));
+    store.dispatch(pageLoaded(false));
     return null;
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
     setTimeout(() => {
-      dispatch(pageLoad(true));
+      dispatch(pageLoaded(true));
     }, 500);
-    // dispatch(pageLoad(true));
+    // dispatch(pageLoaded(true));
   }
   render() {
     return this.props.children;

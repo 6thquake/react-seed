@@ -1,16 +1,21 @@
 {
   "name": "seed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "license": "MIT",
   "dependencies": {
+    "@6thquake/inohupwebsocket": "^0.1.1",
     "@6thquake/react-material": "^0.2.0-beta.5",
     "@sentry/browser": "^4.0.0-beta.12",
     "axios": "^0.18.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "classnames": "^2.2.6",
+    "deepmerge": "^2.1.1",
+    "echarts": "^4.1.0",
+    "immutability-helper": "^2.7.1",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
+    "q": "^1.5.1",
     "qs": "^6.5.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -24,7 +29,8 @@
     "redux": "^4.0.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "dev": "cross-env NODE_ENV=development react-app-rewired start",
+    "start": "cross-env NODE_ENV=production react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
@@ -37,6 +43,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.7.0",
+    "cross-env": "^5.2.0",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-import-resolver-webpack": "^0.9.0",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@6thquake/react-material/styles';
 import Snackbar from '@6thquake/react-material/Snackbar';
-import MessageService from './MessageService';
+import MessageService from '$core/service/MessageService';
 import SnackbarContent from './Snackbar';
 
 const styles = theme => ({});

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import MQ from '$utils/MessageQueue';
+import { messageQueue } from '../service/MessageService';
 import LocaleProvider from '$components/LocaleProvider';
 
 axios.defaults.baseURL = '';
@@ -27,28 +27,28 @@ axios.interceptors.response.use(
       let { retMessage = '系统异常' } = data;
 
       if (status === 403) {
-        MQ.addAndNotify({
+        messageQueue.addAndNotify({
           type: 'ERROR',
           content: '权限不足，请联系管理员！',
         });
       } else if (status === 404) {
-        MQ.addAndNotify({
+        messageQueue.addAndNotify({
           type: 'ERROR',
           content: '接口找不到',
         });
       } else if (status === 500) {
-        MQ.addAndNotify({
+        messageQueue.addAndNotify({
           type: 'ERROR',
           content: '系统异常',
         });
       } else {
-        MQ.addAndNotify({
+        messageQueue.addAndNotify({
           type: 'ERROR',
           content: retMessage,
         });
       }
     } else if (error.request) {
-      MQ.addAndNotify({
+      messageQueue.addAndNotify({
         type: 'ERROR',
         content: error.message || '网络异常，请联系管理员！',
       });
@@ -74,7 +74,7 @@ class BaseDao {
       return response;
     }
 
-    MQ.addAndNotify({
+    messageQueue.addAndNotify({
       type: 'ERROR',
       content: retMessage,
     });
@@ -94,43 +94,46 @@ class BaseDao {
     }
 
     return axios(conf).then(response => {
-      return BaseDao.checkCode(response);
+      // console.log('response', response);
+      // return BaseDao.checkCode(response);
+      return response;
     });
   }
 
   sendGet(config = {}) {
     config.method = 'GET';
 
-    return this.send(config);
+    return this.send({ ...this.config, ...config });
   }
 
   sendPost(config = {}) {
     config.method = 'POST';
 
-    return this.send(config);
+    return this.send({ ...this.config, ...config });
   }
 
   sendPut(config = {}) {
     config.method = 'PUT';
 
-    return this.send(config);
+    return this.send({ ...this.config, ...config });
   }
 
   sendDelete(config = {}) {
     config.method = 'DELETE';
 
-    return this.send(config);
+    return this.send({ ...this.config, ...config });
   }
 
-  get(params) {
+  get(id) {
     let { url } = this.config;
     let conf = {
       method: 'GET',
-      url,
-      params,
+      url: `${url}/${id}`,
     };
 
-    return this.send(conf);
+    return this.send(conf).then(data => {
+      return data.data;
+    });
   }
 
   save(data) {
@@ -141,14 +144,18 @@ class BaseDao {
       data,
     };
 
-    return this.send(conf);
+    return this.send(conf).then(data => {
+      return data.data;
+    });
   }
 
   saveOrUpdate(data) {
     if (data.id) {
       return this.update(data);
     }
-    return this.save(data);
+    return this.save(data).then(data => {
+      return data.data;
+    });
   }
 
   update(data) {
@@ -159,7 +166,9 @@ class BaseDao {
       data,
     };
 
-    return this.send(conf);
+    return this.send(conf).then(data => {
+      return data.data;
+    });
   }
 
   query(params) {
@@ -170,7 +179,9 @@ class BaseDao {
       params,
     };
 
-    return this.send(conf);
+    return this.send(conf).then(data => {
+      return data.data;
+    });
   }
 
   remove(id) {
@@ -180,7 +191,9 @@ class BaseDao {
       url: `${url}/${id}`,
     };
 
-    return this.send(conf);
+    return this.send(conf).then(data => {
+      return data.data;
+    });
   }
 }
 
