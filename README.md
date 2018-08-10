@@ -14,6 +14,7 @@ seed is available on git.dev.sh.ctripcorp.com.
 $ git clone git@git.dev.sh.ctripcorp.com:sixthquake/seed.git
 $ cd seed
 $ yarn
+$ yarn build
 $ yarn start
 ```
 Enter the "http://127.0.0.1:8080" in the browser.
