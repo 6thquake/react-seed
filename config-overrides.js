@@ -2,6 +2,8 @@ const { injectBabelPlugin } = require('react-app-rewired');
 const paths = require('react-scripts/config/paths');
 const path = require('path');
 const fs = require('fs');
+const chalk = require('chalk');
+const Properties = require('./scripts/utils/Properties');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -10,7 +12,9 @@ module.exports = {
   webpack: function(config, env) {
     if (env === 'production') {
       config.output.path = paths.appBuild = resolveApp('./build');
+      config.devtool = false;
     }
+
     config = injectBabelPlugin(
       [
         'import',
@@ -40,27 +44,28 @@ module.exports = {
     for (const k in alias) {
       config.resolve.alias[k] = alias[k];
     }
+
+    console.log(chalk.yellow.bold('--------------------webpack config start:--------------------'));
+    console.log(chalk.yellow(`${JSON.stringify(config)}`));
+    console.log(chalk.yellow.bold('--------------------webpack config end!  --------------------'));
+
     return config;
   },
 
   devServer: function(configFunction) {
     return function(proxy, allowedHost) {
       const config = configFunction(proxy, allowedHost);
-      config.proxy = {
-        '/api': {
-          target: '/',
-          headers: {},
-          changeOrigin: true,
-          secure: false,
-        },
-        '/websocket': {
-          target: '/',
-          headers: {},
-          changeOrigin: true,
-          secure: false,
-          ws: true,
-        },
-      };
+
+      var props = Properties.load();
+      config.proxy = props.proxy;
+
+      console.log(
+        chalk.green.bold('--------------------dev server config start:--------------------'),
+      );
+      console.log(chalk.green(`${JSON.stringify(config)}`));
+      console.log(
+        chalk.green.bold('--------------------dev server config end!  --------------------'),
+      );
 
       return config;
     };
