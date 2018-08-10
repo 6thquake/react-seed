@@ -16,6 +16,8 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLocale({
-  name: 'World'
-})(Home));
+export default withStyles(styles)(
+  withLocale({
+    name: 'World',
+  })(Home),
+);

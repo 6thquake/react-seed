@@ -20,13 +20,13 @@ const styles = theme => ({
   root: {
     display: 'flex',
   },
-  
+
   progressBox: {
     position: 'fixed',
     top: 0,
     left: 0,
     zIndex: theme.zIndex.tooltip,
-    width: '100%'
+    width: '100%',
   },
 });
 
@@ -43,7 +43,7 @@ class App extends React.Component {
         <MuiThemeProvider theme={theme}>
           <LocaleProvider>
             <div className={classes.progressBox}>
-              <PageProgress/>
+              <PageProgress />
             </div>
             <HashRouter>
               <div className={classes.root}>

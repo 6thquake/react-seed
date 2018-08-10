@@ -16,7 +16,7 @@ export default [
     path: '/',
     name: 'Home',
     component: Home,
-    icon: < StarIcon / > ,
+    icon: <StarIcon />,
     exact: true,
   },
   {

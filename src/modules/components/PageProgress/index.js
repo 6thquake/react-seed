@@ -20,15 +20,15 @@ const styles = theme => ({
     display: 'flex',
   },
   height: {
-    height:1.6,
+    height: 1.6,
   },
   barColor: {
     backgroundColor: theme.palette.progress.dark,
     // backgroundColor: "#00BFA5"
   },
   color: {
-    backgroundColor: theme.palette.common.white
-  }
+    backgroundColor: theme.palette.common.white,
+  },
 });
 
 class PageProgress extends React.Component {
@@ -41,13 +41,11 @@ class PageProgress extends React.Component {
     const { classes, load } = this.props;
     return (
       <Progress
-        classes = {
-          {
-            root: classes.height,
-            colorPrimary: classes.color,
-            barColorPrimary: classes.barColor
-          }
-        }
+        classes={{
+          root: classes.height,
+          colorPrimary: classes.color,
+          barColorPrimary: classes.barColor,
+        }}
         isPromise={true}
         isFinish={load}
         estimatedTime={10}
