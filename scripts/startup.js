@@ -76,23 +76,23 @@ app.use(compress());
 /**
  * error handler
  */
-if (settings.debug || settings.DEBUG) {
+if (target !== 'production') {
   app.use(errorHandler());
 }
 
 /**
  * morgan
  */
-if (settings.debug || settings.DEBUG) {
+if (target !== 'production') {
   app.use(
     morgan('dev', {
-      stream: fs.createWriteStream(path.join(__dirname, 'access.log'), {
+      stream: fs.createWriteStream(path.join(__dirname, '../access.log'), {
         flags: 'a',
       }),
     }),
   );
 } else {
-  var logDirectory = path.join(__dirname, 'logs');
+  var logDirectory = path.join(__dirname, '../logs');
 
   // ensure log directory exists
   fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);

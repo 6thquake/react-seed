@@ -3,12 +3,19 @@ import StateManager from '$core/state/StateManager';
 import config from '$config';
 const stateManager = StateManager.getInstance();
 
-const ws = NohupWebSocket.getInstance(`${config.websocket}`);
+const { protocol, host, hostname, port } = (global || window || {}).location;
+
+let wProtocol = 'ws:';
+if (protocol === 'https:') {
+  wProtocol = 'wss:';
+}
+
+const ws = NohupWebSocket.getInstance(`${wProtocol}//${host}${config.websocket}`);
 ws.onopen = () => {
   ws.send({
     url: 'whoami',
     user: stateManager.getProperty('userIP') || '',
-    namespace: 'noc',
+    namespace: 'seed',
   }).progress(data => {
     stateManager.setProperties('local', {
       userIp: data.data.user,
