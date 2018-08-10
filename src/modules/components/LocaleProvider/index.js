@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LocaleProvider from '@6thquake/react-material/LocaleProvider';
-
+import config from '$config'
 import en, { zh } from './languages';
 
 class SeedLocaleProvider extends Component {
@@ -19,7 +19,7 @@ class SeedLocaleProvider extends Component {
   componentDidMount() {}
 
   getDefaultLocale() {
-    return 'en';
+    return config.locale || '';
   }
 
   render() {

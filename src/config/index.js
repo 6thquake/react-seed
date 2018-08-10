@@ -11,7 +11,7 @@ export default {
 
   theme: 'default',
 
-  locale: 'en',
+  locale: 'zh',
 
   google: {
     id: 'UA-106598593-2',
