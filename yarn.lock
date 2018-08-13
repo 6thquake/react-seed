@@ -59,6 +59,10 @@
     video.js "^7.0.5"
     warning "^3.0.0"
 
+"@6thquake/react-properties@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@6thquake/react-properties/-/react-properties-0.1.0.tgz#01acb4491f9c9754e99288b1b35badf95a706988"
+
 "@babel/helper-module-imports@^7.0.0-beta.34":
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/helper-module-imports/-/helper-module-imports-7.0.0-rc.1.tgz#c6269fa9dc451152895f185f0339d45f32c52e75"

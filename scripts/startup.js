@@ -20,10 +20,9 @@ var connect = require('connect'),
   httpProxy = require('http-proxy-middleware'),
   rfs = require('rotating-file-stream'),
   chalk = require('chalk'),
-  Properties = require('./utils/Properties'),
-  Json = require('./utils/Json');
+  Properties = require('@6thquake/react-properties');
 
-var cwd = process.cwd();
+// var cwd = process.cwd();
 var rootPath = path.join(path.dirname(__filename), '../');
 var packageConfig = path.join(rootPath, 'package.json');
 
@@ -32,12 +31,7 @@ if (!fs.existsSync(packageConfig)) {
   process.exit(1);
 }
 
-var props = Properties.load();
-
-var settings = Json(path.relative(cwd, packageConfig));
-
-debugger;
-util._extend(settings, props);
+var settings = Properties.load(rootPath);
 
 var target = process.NODE_ENV || 'development';
 

@@ -3,7 +3,7 @@ const paths = require('react-scripts/config/paths');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
-const Properties = require('./scripts/utils/Properties');
+const Properties = require('@6thquake/react-properties');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -56,7 +56,7 @@ module.exports = {
     return function(proxy, allowedHost) {
       const config = configFunction(proxy, allowedHost);
 
-      var props = Properties.load();
+      var props = Properties.load(path.resolve(__dirname));
       config.proxy = props.proxy;
 
       console.log(
@@ -66,7 +66,7 @@ module.exports = {
       console.log(
         chalk.green.bold('--------------------dev server config end!  --------------------'),
       );
-
+      
       return config;
     };
   },

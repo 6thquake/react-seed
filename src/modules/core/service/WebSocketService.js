@@ -15,7 +15,7 @@ ws.onopen = () => {
   ws.send({
     url: 'whoami',
     user: stateManager.getProperty('userIP') || '',
-    namespace: 'seed',
+    namespace: 'react-seed',
   }).progress(data => {
     stateManager.setProperties('local', {
       userIp: data.data.user,

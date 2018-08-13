@@ -1,7 +1,7 @@
 import Routers from './Routers';
 
 export default {
-  name: 'seed',
+  name: 'react-seed',
 
   navBar: 'vertical', // horizontal, none
 

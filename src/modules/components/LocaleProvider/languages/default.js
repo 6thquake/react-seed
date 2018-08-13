@@ -1,9 +1,9 @@
 export default {
   locale: 'en',
   BrowserTitle: {
-    title: 'seed',
+    title: 'react-seed',
   },
   AppBar: {
-    title: 'seed',
+    title: 'react-seed',
   },
 };
