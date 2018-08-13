@@ -31,12 +31,12 @@ module.exports.load = function() {
     //NODE_ENV can be "production" or "development"
     //Load specific configuration depending on the environment
     filename = path.join(__dirname, configDir + '.env.' + target + '.local');
-    if (!fs.existsSync(filename)) {
+    if (fs.existsSync(filename)) {
       env1 = properties(filename, options);
     }
 
     filename = path.join(__dirname, configDir + '.env.' + target);
-    if (!fs.existsSync(filename)) {
+    if (fs.existsSync(filename)) {
       env2 = properties(filename, options);
     }
   }
@@ -46,12 +46,12 @@ module.exports.load = function() {
   // options.vars = env1;
 
   filename = path.join(__dirname, configDir + '.env.local');
-  if (!fs.existsSync(filename)) {
+  if (fs.existsSync(filename)) {
     env3 = properties(filename, options);
   }
 
   filename = path.join(__dirname, configDir + '.env');
-  if (!fs.existsSync(filename)) {
+  if (fs.existsSync(filename)) {
     env4 = properties(filename, options);
   }
 
