@@ -143,10 +143,6 @@ app.use(
   }),
 );
 
-app.get('/', function(req, res) {
-  return res.render('../build/index', settings);
-});
-
 /**
  *  Allow-Origin
  */
@@ -207,6 +203,13 @@ for (var url in settings.proxy) {
     }),
   );
 }
+
+/**
+ * react-router 4.0 BrowserRouter.
+ */
+app.get('*', function(req, res) {
+  return res.render('../build/index', settings);
+});
 
 http.createServer.apply(http, args).listen(app.get('port'), function createServerCb() {
   console.log(chalk.green(`Express server listening on port ${app.get('port')}`));

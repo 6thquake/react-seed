@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { withStyles, MuiThemeProvider } from '@6thquake/react-material/styles';
 
@@ -45,12 +45,12 @@ class App extends React.Component {
             <div className={classes.progressBox}>
               <PageProgress />
             </div>
-            <HashRouter>
+            <BrowserRouter>
               <div className={classes.root}>
                 <NavBar />
                 <Container />
               </div>
-            </HashRouter>
+            </BrowserRouter>
             {/* <Panel/>  */}
             <Message />
             <BrowserTitle />

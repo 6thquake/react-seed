@@ -66,7 +66,7 @@ module.exports = {
       console.log(
         chalk.green.bold('--------------------dev server config end!  --------------------'),
       );
-      
+
       return config;
     };
   },
