@@ -44,13 +44,9 @@ class RouterProgress extends React.Component {
   }
 }
 
-// export default withStyles(styles, {withTheme: true})(App);
-// export default compose(connect(state => ({
-//     open: state.menuOpen
-// })), withStyles(styles))(Panel);
 export default compose(
   connect(state => ({
     loaded: state.pageLoaded,
   })),
-  withStyles(styles),
+  withStyles(styles, { withTheme: true }),
 )(RouterProgress);

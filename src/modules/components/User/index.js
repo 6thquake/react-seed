@@ -118,5 +118,5 @@ class User extends Component {
 
 export default compose(
   connect(),
-  withStyles(styles),
+  withStyles(styles, { withTheme: true }),
 )(User);

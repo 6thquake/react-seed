@@ -6,4 +6,7 @@ export default {
   AppBar: {
     title: 'react-seed',
   },
+  Logo: {
+    title: 'react-seed',
+  },
 };

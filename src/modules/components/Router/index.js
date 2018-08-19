@@ -18,32 +18,53 @@ import history from './history';
 class RouteComponentWrapper extends React.Component {
   state = {
     isMounted: false,
+    location: null,
   };
 
+  constructor(props) {
+    super(props);
+
+    const { loaded, dispatch } = this.props;
+    if (this.props.loaded) {
+      dispatch(pageLoaded(false));
+    }
+  }
+
   componentWillUnmount() {
-    store.dispatch(pageLoaded(false));
+    const { history, dispatch } = this.props;
+    const { location } = this.state;
+
+    let branch = matchRoutes(allRoutes, location.pathname);
+
+    let routes = branch.map(route => route.route);
+
+    let index = routes.findIndex(element => element.path === history.location.pathname);
+
+    dispatch(pageLoaded(index !== -1));
   }
 
   componentDidMount() {
-    this.setState({ isMounted: true });
+    const { history, dispatch } = this.props;
 
-    const { dispatch } = this.props;
     setTimeout(() => {
       dispatch(pageLoaded(true));
     }, 500);
+
+    this.setState({ isMounted: true, location: history.location });
   }
 
   render() {
     return this.props.children;
   }
 }
-const Wrapper = connect()(withRouter(RouteComponentWrapper));
+const Wrapper = connect(state => ({
+  loaded: state.pageLoaded,
+}))(withRouter(RouteComponentWrapper));
 
 const renderRoutes = (routes, extraProps = {}, switchProps = {}) =>
   routes ? (
     <Switch {...switchProps}>
       {routes.map((route, i) => {
-        console.log(allRoutes);
         let branch = matchRoutes(allRoutes, route.path);
 
         let length = branch.length,
@@ -69,15 +90,15 @@ const renderRoutes = (routes, extraProps = {}, switchProps = {}) =>
             path={route.path}
             exact={route.exact}
             strict={route.strict}
-            render={props =>
-              route.render ? (
-                route.render({ ...props, ...extraProps, route: route })
-              ) : (
-                <Wrapper>
+            render={props => (
+              <Wrapper>
+                {route.render ? (
+                  route.render({ ...props, ...extraProps, route: route })
+                ) : (
                   <route.component {...props} {...extraProps} route={route} />
-                </Wrapper>
-              )
-            }
+                )}
+              </Wrapper>
+            )}
           />
         );
       })}

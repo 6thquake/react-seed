@@ -7,6 +7,8 @@ import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';
 import Link from 'react-router-dom/Link';
 import { loadComponent } from '$components/AsyncComponent';
+import { withRouter } from 'react-router-dom';
+
 const China = loadComponent(() => import('$pages/China'));
 const Shanghai = loadComponent(() => import('$pages/Shanghai'));
 const RouteTest = loadComponent(() => import('$pages/DyncRoute/RouteTest'));
@@ -54,4 +56,4 @@ class DyncRoute extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLocale({ name: 'DyncRoute' })(DyncRoute));
+export default withStyles(styles)(withLocale({ name: 'DyncRoute' })(withRouter(DyncRoute)));

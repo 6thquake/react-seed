@@ -99,6 +99,6 @@ NoData.defaultProps = {
 };
 
 export default compose(
-  withLocale({ name: 'ehr' }),
-  withStyles(style),
+  withLocale({ name: 'NoData' }),
+  withStyles(style, { withTheme: true }),
 )(NoData);

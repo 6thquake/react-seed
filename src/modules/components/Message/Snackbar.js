@@ -82,5 +82,5 @@ MySnackbarContent.propTypes = {
   type: PropTypes.oneOf(['SUCCESS', 'WARNING', 'ERROR', 'INFO']).isRequired,
 };
 
-const MySnackbarContentWrapper = withStyles(styles)(MySnackbarContent);
+const MySnackbarContentWrapper = withStyles(styles, { withTheme: true })(MySnackbarContent);
 export default MySnackbarContentWrapper;

@@ -4,6 +4,9 @@ import { withStyles } from '@6thquake/react-material/styles';
 import SvgIcon from '@6thquake/react-material/SvgIcon';
 import omit from '$utils/omit';
 import classnames from 'classnames';
+import { withLocale } from '@6thquake/react-material/LocaleProvider';
+import { CompatibleGrid as Grid } from '@6thquake/react-material/Grid';
+import Typography from '@6thquake/react-material/Typography';
 
 const style = theme => ({
   root: {
@@ -36,13 +39,20 @@ const style = theme => ({
     strokeMiterlimit: 10,
     strokeWidth: '0.06px',
   },
+  title: {
+    ...theme.typography.title,
+    ...{
+      lineHeight: '68px',
+      color: theme.palette.color.title,
+    },
+  },
 });
 
 class Logo extends Component {
   state = {};
 
   render() {
-    const { classes, open, ...rest } = this.props;
+    const { classes, title, open, ...rest } = this.props;
     const logoClassnames = classnames({
       [classes.container]: true,
       [classes.close]: !open,
@@ -50,17 +60,27 @@ class Logo extends Component {
 
     return (
       <div className={classes.root}>
-        <SvgIcon className={logoClassnames} {...rest}>
-          <polygon className={classes.cl1} points="5.6 9.8 6.8 11.6 5.6 9.8 5.6 9.8" />
-          <polygon className={classes.cl2} points="1 0.4 0.1 1 0.5 14.3 1.4 15.6 1 0.4" />
-          <polygon className={classes.cl2} points="5.6 8 5.6 9.8 6.8 11.6 9 12.9 5.6 8" />
-          <polygon className={classes.cl2} points="12.3 7.6 10 11.4 10.1 13.2 12.1 14.3 12.3 7.6" />
-          <polygon className={classes.cl2} points="12.6 0.9 10.2 1.5 8 4.8 9.1 6.5 12.6 0.9" />
-          <polygon
-            className={classes.cl3}
-            points="12.6 0.9 9.1 6.5 8 4.8 5.4 0.6 1 0.4 1.4 15.6 5.6 15.1 5.6 9.8 5.6 9.8 5.6 8 9 12.9 10 11.4 12.3 7.6 12.1 14.3 15.4 13.9 15.9 0.9 12.6 0.9"
-          />
-        </SvgIcon>
+        <Grid container spacing={24}>
+          <Grid item xs={open ? 6 : 12}>
+            <SvgIcon className={logoClassnames} {...rest}>
+              <polygon className={classes.cl1} points="5.6 9.8 6.8 11.6 5.6 9.8 5.6 9.8" />
+              <polygon className={classes.cl2} points="1 0.4 0.1 1 0.5 14.3 1.4 15.6 1 0.4" />
+              <polygon className={classes.cl2} points="5.6 8 5.6 9.8 6.8 11.6 9 12.9 5.6 8" />
+              <polygon
+                className={classes.cl2}
+                points="12.3 7.6 10 11.4 10.1 13.2 12.1 14.3 12.3 7.6"
+              />
+              <polygon className={classes.cl2} points="12.6 0.9 10.2 1.5 8 4.8 9.1 6.5 12.6 0.9" />
+              <polygon
+                className={classes.cl3}
+                points="12.6 0.9 9.1 6.5 8 4.8 5.4 0.6 1 0.4 1.4 15.6 5.6 15.1 5.6 9.8 5.6 9.8 5.6 8 9 12.9 10 11.4 12.3 7.6 12.1 14.3 15.4 13.9 15.9 0.9 12.6 0.9"
+              />
+            </SvgIcon>
+          </Grid>
+          <Grid item xs={open ? 6 : 0}>
+            <Typography className={classes.title}>{open ? title : ''}</Typography>
+          </Grid>
+        </Grid>
       </div>
     );
   }
@@ -72,4 +92,4 @@ Logo.propTypes = {
 
 Logo.defaultProps = {};
 
-export default withStyles(style)(Logo);
+export default withStyles(style, { withTheme: true })(withLocale({ name: 'Logo' })(Logo));

@@ -8,6 +8,7 @@ import Url from '$utils/Url';
 import LocationManager from '$utils/Location';
 
 import { renderRoutes } from '$components/Router';
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
   root: {},
@@ -122,4 +123,4 @@ class Hello extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLocale({ name: 'Hello' })(Hello));
+export default withStyles(styles)(withLocale({ name: 'Hello' })(withRouter(Hello)));

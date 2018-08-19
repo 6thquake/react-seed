@@ -43,4 +43,4 @@ Message.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Message);
+export default withStyles(styles, { withTheme: true })(Message);

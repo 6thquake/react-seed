@@ -93,7 +93,6 @@ class Bar extends Component {
             <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" noWrap className={classes.flex}>
-            {title}
             <Breadcrumb />
           </Typography>
           <LanguageMenu />
@@ -109,5 +108,5 @@ export default compose(
     return { collapse: !state[MENU_OPEN] };
   }),
   withLocale({ name: 'AppBar' }),
-  withStyles(styles),
+  withStyles(styles, { withTheme: true }),
 )(Bar);

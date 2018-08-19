@@ -6,7 +6,6 @@ import Tooltip from '@6thquake/react-material/Tooltip';
 import Language from '@material-ui/icons/Language';
 import Popover from '@6thquake/react-material/Popover';
 import MenuItem from '@6thquake/react-material/MenuItem';
-import { withLocale } from '@6thquake/react-material/LocaleProvider';
 import compose from 'recompose/compose';
 import LocaleProvider from '$components/LocaleProvider';
 
@@ -89,7 +88,4 @@ class LanguageMenu extends Component {
   }
 }
 
-export default compose(
-  withLocale({ name: 'ehr' }),
-  withStyles(styles),
-)(LanguageMenu);
+export default compose(withStyles(styles, { withTheme: true }))(LanguageMenu);

@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 
-import { withRouter } from 'react-router-dom';
+import { withRouter, Route, Link } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 
 import routes from '$config/Routes';
 
 import Breadcrumb from '@6thquake/react-material/Breadcrumb';
+import { withStyles } from '@6thquake/react-material/styles';
+
+const style = theme => ({});
 
 class Breadcrumb2 extends Component {
-  // state = {
-  //   routes,
-  // };
-
   constructor(props) {
     super(props);
-
-    // this.routes = {};
-    // this.load(routes);
   }
 
   load(elements, parent) {
@@ -37,26 +33,32 @@ class Breadcrumb2 extends Component {
     }
   }
 
+  itemRender(route, params, routes, paths) {
+    const last = routes.indexOf(route) === routes.length - 1;
+    return last ? <span>{route.name}</span> : <Link to={paths.join('/')}>{route.name}</Link>;
+  }
+
   render() {
-    const { match, location, history } = this.props;
+    const { match, location, history, classes } = this.props;
 
-    const branch = matchRoutes(routes, location.pathname);
+    let branch = matchRoutes(routes, location.pathname);
 
-    let breadcrumb = {};
+    if (location.pathname != '/') {
+      let home = matchRoutes(routes, '/');
+      branch = home.concat(branch);
+    }
 
-    branch.map(({ route, match }) => {
-      breadcrumb[match.url] = { ...route, ...match };
-    });
+    let _routes = branch.map(route => route.route);
 
-    return (
-      <React.Fragment>
-        <Breadcrumb nameMap={breadcrumb} separator=">" />
-      </React.Fragment>
-    );
+    return <Breadcrumb routes={_routes} itemRender={this.itemRender} separator=">" color="white" />;
   }
 }
 
-export default connect(state => ({
-  location: state.router.location,
-  changed: state.routesUpdated,
-}))(withRouter(Breadcrumb2));
+export default withStyles(style, { withTheme: true })(
+  withRouter(
+    connect(state => ({
+      location: state.router.location,
+      changed: state.routesUpdated,
+    }))(Breadcrumb2),
+  ),
+);

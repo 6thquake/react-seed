@@ -4,6 +4,8 @@ import { withLocale } from '@6thquake/react-material/LocaleProvider';
 
 import Route from 'react-router-dom/Route';
 import { loadComponent } from '$components/AsyncComponent';
+import { withRouter } from 'react-router-dom';
+
 const Shanghai = loadComponent(() => import('$pages/Shanghai'));
 
 const styles = theme => ({
@@ -24,4 +26,4 @@ class RouteTest extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLocale({ name: 'RouteTest' })(RouteTest));
+export default withStyles(styles)(withLocale({ name: 'RouteTest' })(withRouter(RouteTest)));

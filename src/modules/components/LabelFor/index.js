@@ -24,4 +24,4 @@ class LabelFor extends React.Component {
     );
   }
 }
-export default withStyles(styles)(LabelFor);
+export default withStyles(styles, { withTheme: true })(LabelFor);

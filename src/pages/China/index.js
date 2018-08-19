@@ -3,6 +3,7 @@ import { withStyles } from '@6thquake/react-material/styles';
 import { withLocale } from '@6thquake/react-material/LocaleProvider';
 
 import { renderRoutes } from '$components/Router';
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
   root: {},
@@ -25,4 +26,4 @@ class China extends React.Component {
   }
 }
 
-export default withStyles(styles)(withLocale({ name: 'China' })(China));
+export default withStyles(styles)(withLocale({ name: 'China' })(withRouter(China)));

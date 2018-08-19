@@ -20,36 +20,36 @@ const DyncRoute = loadComponent(() => import('$pages/DyncRoute'));
 export default [
   {
     path: '/',
-    name: <Link to="/">Home</Link>,
+    name: 'Home',
     component: Home,
     icon: <StarIcon />,
     exact: true,
   },
   {
     path: '/hello',
-    name: 'hello',
+    name: 'Hello',
     icon: <StarIcon />,
     component: RouteComponent,
     routes: [
       {
         path: '/hello/1',
-        name: 'hello-1',
+        name: 'Hello-1',
         component: Hello,
         routes: [
           {
             path: '/hello/1/world',
-            name: <Link to="/hello/1/world">world</Link>,
+            name: 'World',
             component: World,
           },
           {
             path: '/hello/1/china',
-            name: 'china',
+            name: 'China',
             icon: <InboxIcon />,
             component: China,
             routes: [
               {
                 path: '/hello/1/china/shanghai',
-                name: <Link to="/hello/1/china/shanghai">shanghai</Link>,
+                name: 'Shanghai',
                 component: Shanghai,
               },
             ],

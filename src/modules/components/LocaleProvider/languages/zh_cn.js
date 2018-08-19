@@ -6,4 +6,7 @@ export default {
   AppBar: {
     title: '基准项目',
   },
+  Logo: {
+    title: '基准项目',
+  },
 };
