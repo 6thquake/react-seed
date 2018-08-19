@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { withStyles } from '@6thquake/react-material/styles';
 import Scrollbar from '@6thquake/react-material/Scrollbar';
 
-import routes from '$config/Routers';
+import routes from '$config/Routes';
 import AppBar from '$components/AppBar';
 
-import RouteWithSubRoutes from '../RouteWithSubRoutes';
+import { renderRoutes } from '../Router';
 
 const styles = theme => ({
   root: {
@@ -74,7 +74,7 @@ class Container extends Component {
           >
             <AppBar position={'fixed'} innerRef={this.appBarRef} />
             <div className={classes.toolbar} />
-            {RouteWithSubRoutes(routes)}
+            {renderRoutes(routes)}
           </Scrollbar>
         </div>
       </div>

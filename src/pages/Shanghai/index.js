@@ -8,14 +8,14 @@ const styles = theme => ({
   root: {},
 });
 
-class Home extends React.Component {
+class Shanghai extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <div>React Material Seed</div>;
+    return <div>Welcome to shanghai!</div>;
   }
 }
 
-export default withStyles(styles)(withLocale({ name: 'World' })(withRouter(Home)));
+export default withStyles(styles)(withLocale({ name: 'Shanghai' })(withRouter(Shanghai)));

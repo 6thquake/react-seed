@@ -21,14 +21,13 @@ const styles = theme => ({
   },
 });
 
-class PageProgress extends React.Component {
+class RouterProgress extends React.Component {
   state = {
-    load: false,
-    finish: false,
+    loaded: false,
   };
 
   render() {
-    const { classes, load } = this.props;
+    const { classes, loaded } = this.props;
     return (
       <Progress
         classes={{
@@ -37,7 +36,7 @@ class PageProgress extends React.Component {
           barColorPrimary: classes.barColor,
         }}
         isPromise={true}
-        isFinish={load}
+        isFinish={loaded}
         estimatedTime={10}
         // completed={30}
       />
@@ -51,7 +50,7 @@ class PageProgress extends React.Component {
 // })), withStyles(styles))(Panel);
 export default compose(
   connect(state => ({
-    load: state.pageLoaded,
+    loaded: state.pageLoaded,
   })),
   withStyles(styles),
-)(PageProgress);
+)(RouterProgress);

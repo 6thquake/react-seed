@@ -1,4 +1,4 @@
-import Routers from './Routers';
+import Routes from './Routes';
 
 export default {
   name: 'react-seed',
@@ -20,7 +20,7 @@ export default {
   html5Mode: false,
   hashPrefix: '',
 
-  routers: Routers,
+  routes: Routes,
 
   api: '/api/v1',
   websocket: 'ws://localhost:8080/websocket',

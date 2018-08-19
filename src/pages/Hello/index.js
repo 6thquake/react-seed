@@ -7,6 +7,8 @@ import StateManager from '$core/state/StateManager';
 import Url from '$utils/Url';
 import LocationManager from '$utils/Location';
 
+import { renderRoutes } from '$components/Router';
+
 const styles = theme => ({
   root: {},
 });
@@ -68,6 +70,8 @@ class Hello extends React.Component {
     let d = stateManager.getProperty('d');
     let e = stateManager.getProperty('e');
 
+    const { route } = this.props;
+
     return (
       <React.Fragment>
         <h1>Hello world! I am page 1.</h1>
@@ -79,6 +83,7 @@ class Hello extends React.Component {
         </p>
         <br />
         <p>{JSON.stringify(hash)}</p>
+        <fieldset>{renderRoutes(route.routes)}</fieldset>
         <br />
         <br />
         <br />

@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import classNames from 'classnames';
 import User from '$components/User';
 import LanguageMenu from '$components/LanguageMenu';
+import Breadcrumb from '$components/Breadcrumb';
 import { withLocale } from '@6thquake/react-material/LocaleProvider';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
@@ -93,6 +94,7 @@ class Bar extends Component {
           </IconButton>
           <Typography variant="title" color="inherit" noWrap className={classes.flex}>
             {title}
+            <Breadcrumb />
           </Typography>
           <LanguageMenu />
           <User />

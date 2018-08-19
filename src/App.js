@@ -9,12 +9,15 @@ import Message from '$components/Message';
 import BrowserTitle from '$components/BrowserTitle';
 import LocaleProvider from '$components/LocaleProvider';
 import compose from 'recompose/compose';
-import PageProgress from '$components/PageProgress';
+import RouterProgress from '$components/RouterProgress';
 import { LoadingPanel } from '@6thquake/react-material/Panel';
 import { connect } from 'react-redux';
 
 import theme from '$themes';
 import store from '$redux';
+
+import { history } from '$components/Router';
+import { ConnectedRouter, push } from 'react-router-redux';
 
 const styles = theme => ({
   root: {
@@ -31,26 +34,27 @@ const styles = theme => ({
 });
 
 class App extends React.Component {
-  state = {
-    load: false,
-  };
-
   render() {
     const { classes } = this.props;
-    const { load } = this.state;
     return (
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <LocaleProvider>
             <div className={classes.progressBox}>
-              <PageProgress />
+              <RouterProgress />
             </div>
-            <BrowserRouter>
+
+            {/* ConnectedRouter will use the store from Provider automatically */}
+
+            {/*<BrowserRouter>*/}
+            <ConnectedRouter history={history}>
               <div className={classes.root}>
                 <NavBar />
                 <Container />
               </div>
-            </BrowserRouter>
+            </ConnectedRouter>
+            {/*</BrowserRouter>*/}
+
             {/* <Panel/>  */}
             <Message />
             <BrowserTitle />
@@ -62,6 +66,3 @@ class App extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(App);
-// export default compose(connect(state => ({
-//     load: state.open
-// })), withStyles(styles))(App);

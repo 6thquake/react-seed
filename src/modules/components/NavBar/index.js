@@ -21,7 +21,7 @@ import Drawer from '@6thquake/react-material/Drawer';
 import SessionStorage from '$utils/SessionStorage';
 import { operateMenuOpen } from '$redux/actions/menuOpen';
 import { MENU_OPEN } from '$redux/types';
-import menu from '$config/Routers';
+import menu from '$config/Routes';
 import Logo from '$components/Logo';
 
 const styles = theme => {
