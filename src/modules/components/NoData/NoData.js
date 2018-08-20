@@ -6,16 +6,13 @@ import TableCell from '@6thquake/react-material/TableCell';
 import Grid from '@6thquake/react-material/Grid';
 import classnames from 'classnames';
 import { withLocale } from '@6thquake/react-material/LocaleProvider';
+import compose from 'recompose/compose';
 import Icon from './Icon';
 import omit from '$utils/omit';
-import compose from 'recompose/compose';
 
 const style = theme => ({
-  td: {
-    padding: '10px',
-  },
   item: {},
-  tip: {
+  text: {
     textAlign: 'center',
   },
   iconRoot: {
@@ -41,20 +38,12 @@ const style = theme => ({
 
 class NoData extends Component {
   state = {
-    tip: '暂无数据',
     sizes: ['xs', 'sm', 'md', 'lg', 'xl'],
   };
 
-  static getDerivedStateFromProps(props, state) {
-    const { locales, tip } = props;
-    return {
-      tip: tip || locales['label.NoDatayet'],
-    };
-  }
-
   render() {
-    const { sizes, tip } = this.state;
-    const { classes, colSpan, visible, size, ...rest } = this.props;
+    const { sizes } = this.state;
+    const { classes, visible, size, text, ...rest } = this.props;
     const itemClassName = classnames(
       {
         [classes[size]]: sizes.includes(size),
@@ -66,18 +55,16 @@ class NoData extends Component {
 
     return (
       visible && (
-        <TableRow>
-          <TableCell colSpan={colSpan} className={classes.td} {...restProps}>
+          <React.Fragment {...restProps}>
             <Grid container direction="column" spacing={24} justify="center" alignItems="center">
               <Grid item className={itemClassName}>
                 <Icon classes={{ root: classes.iconRoot }} />
               </Grid>
-              <Grid item className={classes.tip}>
-                {tip}
+              <Grid item className={classes.text}>
+                {text}
               </Grid>
             </Grid>
-          </TableCell>
-        </TableRow>
+          </React.Fragment>
       )
     );
   }
@@ -85,20 +72,18 @@ class NoData extends Component {
 
 NoData.propTypes = {
   classes: PropTypes.object.isRequired,
-  colSpan: PropTypes.number,
   visible: PropTypes.bool,
-  tip: PropTypes.any,
+  text: PropTypes.any,
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 };
 
 NoData.defaultProps = {
-  colSpan: 1, //列数
   visible: false,
-  tip: '',
+  text: '',
   size: 'md',
 };
 
 export default compose(
   withLocale({ name: 'NoData' }),
-  withStyles(style, { withTheme: true }),
+  withStyles(style),
 )(NoData);

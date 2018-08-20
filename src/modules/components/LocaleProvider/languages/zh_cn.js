@@ -9,4 +9,7 @@ export default {
   Logo: {
     title: '基准项目',
   },
+  NoData: {
+    text: '暂无可用数据',
+  },
 };

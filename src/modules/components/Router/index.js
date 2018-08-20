@@ -15,6 +15,9 @@ import { withRouter } from 'react-router-dom';
 
 import history from './history';
 
+import NotFound from '$components/NotFound';
+import Forbidden from '$components/Forbidden';
+
 class RouteComponentWrapper extends React.Component {
   state = {
     isMounted: false,
@@ -102,6 +105,27 @@ const renderRoutes = (routes, extraProps = {}, switchProps = {}) =>
           />
         );
       })}
+
+      <Route
+        path={'/403'}
+        key={'403'}
+        render={props => (
+          <Wrapper>
+            <Forbidden />
+          </Wrapper>
+        )}
+      />
+
+      <Route
+        path={'*'}
+        key={'404'}
+        exact={true}
+        render={props => (
+          <Wrapper>
+            <NotFound />
+          </Wrapper>
+        )}
+      />
     </Switch>
   ) : null;
 

@@ -9,4 +9,7 @@ export default {
   Logo: {
     title: 'react-seed',
   },
+  NoData: {
+    text: 'No data is available.',
+  },
 };
