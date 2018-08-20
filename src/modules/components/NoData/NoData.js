@@ -54,31 +54,27 @@ class NoData extends Component {
     const restProps = omit(rest, ['changeLocale', 'locale', 'locales']);
 
     return (
-      visible && (
-          <React.Fragment {...restProps}>
-            <Grid container direction="column" spacing={24} justify="center" alignItems="center">
-              <Grid item className={itemClassName}>
-                <Icon classes={{ root: classes.iconRoot }} />
-              </Grid>
-              <Grid item className={classes.text}>
-                {text}
-              </Grid>
-            </Grid>
-          </React.Fragment>
-      )
+      <React.Fragment {...restProps}>
+        <Grid container direction="column" spacing={24} justify="center" alignItems="center">
+          <Grid item className={itemClassName}>
+            <Icon classes={{ root: classes.iconRoot }} />
+          </Grid>
+          <Grid item className={classes.text}>
+            {text}
+          </Grid>
+        </Grid>
+      </React.Fragment>
     );
   }
 }
 
 NoData.propTypes = {
   classes: PropTypes.object.isRequired,
-  visible: PropTypes.bool,
   text: PropTypes.any,
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 };
 
 NoData.defaultProps = {
-  visible: false,
   text: '',
   size: 'md',
 };
