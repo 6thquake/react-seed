@@ -24,4 +24,6 @@ export default {
 
   api: '/api/v1',
   websocket: 'ws://localhost:8080/websocket',
+
+  contentType: 'application/json;charset=UTF-8',
 };

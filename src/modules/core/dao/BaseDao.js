@@ -1,11 +1,14 @@
 import axios from 'axios';
+import humps from 'humps';
+
+import config from '$config';
 import { messageQueue } from '../service/MessageService';
 import LocaleProvider from '$components/LocaleProvider';
 
 axios.defaults.baseURL = '';
 axios.defaults.withCredentials = true;
 axios.defaults.timeout = 100000;
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+axios.defaults.headers.post['Content-Type'] = config.contentType;
 
 // axios 拦截器
 axios.interceptors.request.use(
@@ -25,8 +28,12 @@ axios.interceptors.response.use(
     if (error.response) {
       let { data = {}, status } = error.response;
       let { retMessage = '系统异常' } = data;
-
-      if (status === 403) {
+      if (data.detail) {
+        messageQueue.addAndNotify({
+          type: 'ERROR',
+          content: data.detail,
+        });
+      } else if (status === 403) {
         messageQueue.addAndNotify({
           type: 'ERROR',
           content: '权限不足，请联系管理员！',
@@ -65,133 +72,156 @@ class BaseDao {
     this.config = config;
   }
 
-  static checkCode(response) {
-    let { data } = response;
-    data = data || {};
-    let { retMessage, retCode } = data;
-    let code = Number(retCode);
-    if ((code >= 200 && code < 300) || code === 304) {
-      return response;
-    }
-
-    messageQueue.addAndNotify({
-      type: 'ERROR',
-      content: retMessage,
-    });
-    return Promise.reject(retMessage);
-  }
-
-  // 核心方法
-  send(config) {
-    let conf = Object.assign({}, config);
+  send(req) {
+    let conf = Object.assign({}, req);
     try {
-      if (conf.data && !conf.data.head) {
+      if (conf.headers && !conf.headers.locale) {
         const locale = LocaleProvider.locale;
-        Object.assign(conf.data, { head: { locale } });
+        Object.assign(conf.headers, { locale });
       }
     } catch (e) {
-      console.log('data格式异常！');
+      console.error('Can not set locale to request header.');
+    }
+
+    if (conf.data) {
+      if (conf.data instanceof FormData) {
+        let data = new FormData();
+        for (let pair of conf.data.entries()) {
+          data.append(humps.decamelize(pair[0]), pair[1]);
+        }
+        config.data = data;
+      } else {
+        conf.data = humps.decamelizeKeys(conf.data);
+      }
+    }
+
+    if (conf.params) {
+      conf.params = humps.decamelizeKeys(conf.params);
     }
 
     return axios(conf).then(response => {
-      // console.log('response', response);
-      // return BaseDao.checkCode(response);
+      response.data = humps.camelizeKeys(response.data);
       return response;
     });
   }
 
-  sendGet(config = {}) {
-    config.method = 'GET';
+  sendGet(req = {}) {
+    req.method = 'GET';
 
-    return this.send({ ...this.config, ...config });
+    return this.send({
+      ...this.config,
+      ...req,
+    });
   }
 
-  sendPost(config = {}) {
-    config.method = 'POST';
+  sendPost(req = {}) {
+    req.method = 'POST';
 
-    return this.send({ ...this.config, ...config });
+    return this.send({
+      ...this.config,
+      ...req,
+    });
   }
 
-  sendPut(config = {}) {
-    config.method = 'PUT';
+  sendPut(req = {}) {
+    req.method = 'PUT';
 
-    return this.send({ ...this.config, ...config });
+    return this.send({
+      ...this.config,
+      ...req,
+    });
   }
 
-  sendDelete(config = {}) {
-    config.method = 'DELETE';
-
-    return this.send({ ...this.config, ...config });
+  sendPatch(req = {}) {
+    req.method = 'PATCH';
+    return this.send({
+      ...this.config,
+      ...req,
+    });
   }
 
-  get(id) {
+  sendDelete(req = {}) {
+    req.method = 'DELETE';
+
+    return this.send({
+      ...this.config,
+      ...req,
+    });
+  }
+
+  get(id, headers = {}) {
     let { url } = this.config;
-    let conf = {
+    let req = {
       method: 'GET',
       url: `${url}/${id}`,
+      headers,
     };
 
-    return this.send(conf).then(data => {
+    return this.send(req).then(data => {
       return data.data;
     });
   }
 
-  save(data) {
+  save(data, headers = {}) {
     let { url } = this.config;
-    let conf = {
+    let req = {
       method: 'POST',
       url,
       data,
+      headers,
     };
 
-    return this.send(conf).then(data => {
+    return this.send(req).then(data => {
       return data.data;
     });
   }
 
-  saveOrUpdate(data) {
-    if (data.id) {
-      return this.update(data);
-    }
-    return this.save(data).then(data => {
-      return data.data;
-    });
-  }
-
-  update(data) {
+  update(data, headers = {}) {
+    let id = data instanceof FormData ? data.get('id') : data.id;
     let { url } = this.config;
-    let conf = {
+    let req = {
       method: 'PUT',
-      url,
+      url: `${url}/${id}`,
       data,
+      headers,
     };
 
-    return this.send(conf).then(data => {
+    return this.send(req).then(data => {
       return data.data;
     });
   }
 
-  query(params) {
+  saveOrUpdate(data, headers = {}) {
+    let id = data instanceof FormData ? data.get('id') : data.id;
+    if (id) {
+      return this.update(data, headers);
+    }
+    return this.save(data, headers);
+  }
+
+  query(params, headers = {}) {
     let { url } = this.config;
-    let conf = {
+    let req = {
       method: 'GET',
       url,
       params,
+      headers,
     };
 
-    return this.send(conf).then(data => {
+    return this.send(req).then(data => {
       return data.data;
     });
   }
 
-  remove(id) {
+  remove(id, headers = {}) {
     let { url } = this.config;
-    let conf = {
+    let req = {
       method: 'DELETE',
       url: `${url}/${id}`,
+      headers,
     };
 
-    return this.send(conf).then(data => {
+    return this.send(req).then(data => {
       return data.data;
     });
   }
