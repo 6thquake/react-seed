@@ -8,9 +8,9 @@
   dependencies:
     q "1.0.1"
 
-"@6thquake/react-material@^0.2.0-beta.10":
-  version "0.2.0-beta.10"
-  resolved "https://registry.yarnpkg.com/@6thquake/react-material/-/react-material-0.2.0-beta.10.tgz#8625437837e3418a1562ef09f0509c9994ff1a45"
+"@6thquake/react-material@^0.2.1-beta.2":
+  version "0.2.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@6thquake/react-material/-/react-material-0.2.1-beta.2.tgz#c16b38d0fefce016ce2e18ebc31049c18b288913"
   dependencies:
     "@material-ui/core" "^1.4.1"
     "@material-ui/icons" "^2.0.0-beta.1"

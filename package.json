@@ -1,11 +1,11 @@
 {
   "name": "react-seed",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "license": "MIT",
   "dependencies": {
     "@6thquake/inohupwebsocket": "^0.1.1",
-    "@6thquake/react-material": "^0.2.0-beta.12",
+    "@6thquake/react-material": "^0.2.1-beta.2",
     "@6thquake/react-properties": "^0.1.0",
     "@sentry/browser": "^4.0.0-beta.12",
     "axios": "^0.18.0",

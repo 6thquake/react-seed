@@ -43,7 +43,7 @@ class NoData extends Component {
 
   render() {
     const { sizes } = this.state;
-    const { classes, visible, size, text, ...rest } = this.props;
+    const { classes, size, text, ...rest } = this.props;
     const itemClassName = classnames(
       {
         [classes[size]]: sizes.includes(size),
