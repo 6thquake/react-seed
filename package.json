@@ -25,6 +25,7 @@
     "getopts": "^2.1.2",
     "history": "^4.7.2",
     "http-proxy-middleware": "^0.18.0",
+    "humps": "^2.0.1",
     "immutability-helper": "^2.7.1",
     "lodash": "^4.17.10",
     "method-override": "^2.3.10",
